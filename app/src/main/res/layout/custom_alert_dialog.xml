@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:cardCornerRadius="8dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lineSpacingMultiplier="1.25"
+            tools:text="@string/title_dialog"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline37"
+            app:layout_constraintStart_toStartOf="@+id/guideline38"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_content_dialog"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_title"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
+            android:lineSpacingMultiplier="1.25"
+            tools:text="@string/content_dialog"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline37"
+            app:layout_constraintStart_toStartOf="@+id/guideline38"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+
+        <Button
+            android:id="@+id/btn_cancel"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="104dp"
+            android:layout_height="48dp"
+            android:layout_below="@id/tv_content_dialog"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/bg_custom_button"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="@string/text_btn_cancel"
+            android:textAllCaps="false"
+            android:textAppearance="@style/TextAppearance.AppCompat.Button"
+            android:textColor="@color/color_positive"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_yes"
+            app:layout_constraintStart_toStartOf="@+id/tv_title"
+            app:layout_constraintTop_toBottomOf="@+id/tv_content_dialog" />
+
+        <Button
+            android:id="@+id/btn_yes"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="104dp"
+            android:layout_height="48dp"
+            android:layout_below="@id/tv_content_dialog"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/bg_custom_button"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="@string/text_btn_yes"
+            android:textAllCaps="false"
+            android:textAppearance="@style/TextAppearance.AppCompat.Button"
+            android:textColor="@color/color_positive"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@+id/tv_title"
+            app:layout_constraintStart_toEndOf="@+id/btn_cancel"
+            app:layout_constraintTop_toTopOf="@+id/btn_cancel" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline37"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="16dp" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline38"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="16dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
