@@ -1,103 +1,77 @@
 package com.gdk.moviecatalogue.ui.fragment
 
-import android.content.Context
-import android.net.Uri
+import android.annotation.SuppressLint
+import android.app.ProgressDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.gdk.moviecatalogue.R
+import com.gdk.moviecatalogue.adapter.MovieAdapter
+import com.gdk.moviecatalogue.model.MovieResponse
+import com.gdk.moviecatalogue.presenter.MoviePresenter
+import com.gdk.moviecatalogue.services.BaseApi
+import com.gdk.moviecatalogue.view.MovieView
+import kotlinx.android.synthetic.main.fragment_movie.view.*
+import org.jetbrains.anko.support.v4.toast
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class MovieFragment : Fragment(), MovieView, MovieAdapter.OnItemClickListener {
 
-/**
- * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [MovieFragment.OnFragmentInteractionListener] interface
- * to handle interaction events.
- * Use the [MovieFragment.newInstance] factory method to
- * create an instance of this fragment.
- *
- */
-class MovieFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-    private var listener: OnFragmentInteractionListener? = null
+    lateinit var progress: ProgressDialog
+    private lateinit var mAdapter: MovieAdapter
+    private lateinit var mPresenter: MoviePresenter
+    private lateinit var dataGlobal: ArrayList<MovieResponse.ResultMovie>
+    private val KEY_MOVIE = "DataMovie"
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_movie, container, false)
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    fun onButtonPressed(uri: Uri) {
-        listener?.onFragmentInteraction(uri)
-    }
+    @SuppressLint("WrongConstant")
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        if (context is OnFragmentInteractionListener) {
-            listener = context
+        val factory: BaseApi = BaseApi.create()
+        view.rv_movie.layoutManager = LinearLayoutManager(context, LinearLayout.VERTICAL, false)
+        if (savedInstanceState != null) {
+            showData(savedInstanceState.getParcelableArrayList(KEY_MOVIE))
         } else {
-            throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener")
+            mPresenter = MoviePresenter(this, factory)
+            getData()
         }
     }
 
-    override fun onDetach() {
-        super.onDetach()
-        listener = null
+    override fun getData() {
+        mPresenter.getDataMovie()
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     *
-     *
-     * See the Android Training lesson [Communicating with Other Fragments]
-     * (http://developer.android.com/training/basics/fragments/communicating.html)
-     * for more information.
-     */
-    interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        fun onFragmentInteraction(uri: Uri)
+    override fun makeToast(msg: String) {
+        toast(msg)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment MovieFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            MovieFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun showProgress() {
+        progress = ProgressDialog(activity)
+        progress.setMessage("Please wait...")
+        progress.show()
+    }
+
+    override fun hideProgress() {
+        progress.dismiss()
+    }
+
+    override fun showData(data: ArrayList<MovieResponse.ResultMovie>) {
+        mAdapter = MovieAdapter(data)
+        view?.rv_movie?.adapter = mAdapter
+        mAdapter.setOnItemClickListener(this)
+        this.dataGlobal = data
+    }
+
+    override fun onItemClick(pos: Int) {
+        toast(pos.toString())
     }
 }

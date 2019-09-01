@@ -1,8 +1,6 @@
 package com.gdk.moviecatalogue.model
 
 import android.os.Parcelable
-import androidx.room.Entity
-import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
@@ -19,13 +17,11 @@ class MovieResponse {
     @SerializedName("results")
     var results: List<ResultMovie>? = null
 
-    @Entity(tableName = "resultmovie")
     @Parcelize
     data class ResultMovie(
         @SerializedName("vote_count")
         var vote_count: Long? = 0,
 
-        @PrimaryKey
         @SerializedName("id")
         var id: Long? = 0,
 

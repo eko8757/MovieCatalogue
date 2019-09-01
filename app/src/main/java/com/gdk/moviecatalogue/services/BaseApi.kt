@@ -17,15 +17,13 @@ interface BaseApi {
     @GET("discover/movie?")
     fun getDiscoverMovie(
         @Query("api_key") api_key: String,
-        @Query("primary_release_date.gte") date_gte: String,
-        @Query("primary_release_date.lte") date_lte: String
+        @Query("language") language: String
     ) : Observable<MovieResponse>
 
     @GET("tv/popular?")
     fun getDiscoverTv(
         @Query("api_key") api_key: String,
-        @Query("languange") languange : String,
-        @Query("page") page : String
+        @Query("language") language: String
     ) : Observable<TvResponse>
 
     companion object {

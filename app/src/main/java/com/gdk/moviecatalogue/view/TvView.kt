@@ -8,4 +8,5 @@ interface TvView {
     fun showProgress()
     fun hideProgress()
     fun showData(data: ArrayList<TvResponse.ResultTvShow>)
+    fun getData()
 }

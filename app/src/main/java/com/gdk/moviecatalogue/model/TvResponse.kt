@@ -1,8 +1,6 @@
 package com.gdk.moviecatalogue.model
 
 import android.os.Parcelable
-import androidx.room.Entity
-import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
@@ -16,13 +14,12 @@ class TvResponse {
     @SerializedName("results")
     var results: List<ResultTvShow>? = null
 
-    @Entity(tableName = "tvshowdb")
     @Parcelize
     data class ResultTvShow(
         @SerializedName("original_name")
         var original_name: String? = null,
         @SerializedName("name")
-        var name: String? = null,
+        var title: String? = null,
         @SerializedName("popularity")
         var popularity: Double? = 0.0,
         @SerializedName("vote_count")
@@ -33,7 +30,7 @@ class TvResponse {
         var backdrop_path: String? = null,
         @SerializedName("original_languange")
         var original_languange: String? = null,
-        @PrimaryKey
+
         @SerializedName("id")
         var id: Long? = 0,
         @SerializedName("vote_average")

@@ -19,6 +19,12 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "MOVIE_API_KEY", "\"e1c6110868d89666f3f7ddda01910da7\""
+            buildConfigField "String", "MOVIE_PATH", "\"https://image.tmdb.org/t/p/w500/\""
+        }
+        debug {
+            buildConfigField "String", "MOVIE_API_KEY", "\"e1c6110868d89666f3f7ddda01910da7\""
+            buildConfigField "String", "MOVIE_PATH", "\"https://image.tmdb.org/t/p/w500/\""
         }
     }
 
@@ -41,17 +47,10 @@ dependencies {
     implementation "org.jetbrains.anko:anko:$anko_version"
 
     // service
-    implementation 'com.squareup.okhttp3:okhttp:3.13.1'
-    implementation 'com.squareup.okhttp3:logging-interceptor:3.13.1'
-    implementation 'com.squareup.retrofit2:retrofit:2.6.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
-    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
-    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
-    implementation 'io.reactivex.rxjava2:rxjava:2.2.9'
-
-    //db
-    implementation "android.arch.persistence.room:runtime:$rootProject.room_version"
-    annotationProcessor "android.arch.persistence.room:compiler:$rootProject.room_version"
+    implementation "com.squareup.retrofit2:retrofit:2.6.0"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:2.6.0"
+    implementation "com.squareup.retrofit2:converter-gson:2.6.0"
+    implementation "io.reactivex.rxjava2:rxandroid:2.0.2"
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.12'

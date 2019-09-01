@@ -8,4 +8,5 @@ interface MovieView {
     fun showProgress()
     fun hideProgress()
     fun showData(data: ArrayList<MovieResponse.ResultMovie>)
+    fun getData()
 }

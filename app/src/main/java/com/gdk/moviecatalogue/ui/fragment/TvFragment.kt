@@ -1,103 +1,77 @@
 package com.gdk.moviecatalogue.ui.fragment
 
-import android.content.Context
-import android.net.Uri
+import android.annotation.SuppressLint
+import android.app.ProgressDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.gdk.moviecatalogue.R
+import com.gdk.moviecatalogue.adapter.TvAdapter
+import com.gdk.moviecatalogue.model.TvResponse
+import com.gdk.moviecatalogue.presenter.TvPresenter
+import com.gdk.moviecatalogue.services.BaseApi
+import com.gdk.moviecatalogue.view.TvView
+import kotlinx.android.synthetic.main.fragment_tv.view.*
+import org.jetbrains.anko.support.v4.toast
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class TvFragment : Fragment(), TvView, TvAdapter.OnItemClickListener {
 
-/**
- * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [TvFragment.OnFragmentInteractionListener] interface
- * to handle interaction events.
- * Use the [TvFragment.newInstance] factory method to
- * create an instance of this fragment.
- *
- */
-class TvFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-    private var listener: OnFragmentInteractionListener? = null
+    lateinit var progress: ProgressDialog
+    private lateinit var mAdapter: TvAdapter
+    private lateinit var mPresenter: TvPresenter
+    private lateinit var dataGlobal: ArrayList<TvResponse.ResultTvShow>
+    private val KEY_TV = "DataTv"
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_tv, container, false)
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    fun onButtonPressed(uri: Uri) {
-        listener?.onFragmentInteraction(uri)
-    }
+    @SuppressLint("WrongConstant")
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        if (context is OnFragmentInteractionListener) {
-            listener = context
+        var factory: BaseApi = BaseApi.create()
+        view.rv_tv_show.layoutManager = LinearLayoutManager(context, LinearLayout.VERTICAL, false)
+        if (savedInstanceState != null) {
+            showData(savedInstanceState.getParcelableArrayList(KEY_TV))
         } else {
-            throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener")
+            mPresenter = TvPresenter(this, factory)
+            getData()
         }
     }
 
-    override fun onDetach() {
-        super.onDetach()
-        listener = null
+    override fun getData() {
+        mPresenter.getDataTv()
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     *
-     *
-     * See the Android Training lesson [Communicating with Other Fragments]
-     * (http://developer.android.com/training/basics/fragments/communicating.html)
-     * for more information.
-     */
-    interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        fun onFragmentInteraction(uri: Uri)
+    override fun makeToast(msg: String) {
+        toast(msg)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment TvFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            TvFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun showProgress() {
+        progress = ProgressDialog(activity)
+        progress.setMessage("Please wait...")
+        progress.show()
+    }
+
+    override fun hideProgress() {
+        progress.dismiss()
+    }
+
+    override fun showData(data: ArrayList<TvResponse.ResultTvShow>) {
+        mAdapter = TvAdapter(data)
+        view?.rv_tv_show?.adapter = mAdapter
+        mAdapter.setOnItemClickListener(this)
+        this.dataGlobal = data
+    }
+
+    override fun onItemClick(pos: Int) {
+        toast(pos.toString())
     }
 }
