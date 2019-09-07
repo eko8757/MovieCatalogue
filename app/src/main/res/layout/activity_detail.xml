@@ -38,6 +38,28 @@
         app:layout_constraintTop_toBottomOf="@id/tv_title_detail"
         tools:text="7-9-2019" />
 
+    <!--description-->
+    <TextView
+        android:id="@+id/tv_title_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Overview:"
+        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+        app:layout_constraintStart_toEndOf="@id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@id/img_detail"
+        android:layout_marginTop="16dp"
+        android:textSize="@dimen/font_normal"/>
+
+    <TextView
+        android:id="@+id/tv_desc_detail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/guideline_left"
+        app:layout_constraintEnd_toStartOf="@id/guideline_right"
+        app:layout_constraintTop_toBottomOf="@id/tv_title_desc"
+        tools:text="Lorem ipsum dolor sit amet"
+        android:textAlignment="textStart"/>
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_left"
         android:layout_width="wrap_content"

@@ -15,11 +15,13 @@ import com.gdk.moviecatalogue.adapter.MovieAdapter
 import com.gdk.moviecatalogue.model.MovieResponse
 import com.gdk.moviecatalogue.presenter.MoviePresenter
 import com.gdk.moviecatalogue.services.BaseApi
+import com.gdk.moviecatalogue.ui.activity.DetailActivity
 import com.gdk.moviecatalogue.view.MovieView
 import kotlinx.android.synthetic.main.fragment_movie.view.*
+import org.jetbrains.anko.support.v4.intentFor
 import org.jetbrains.anko.support.v4.toast
 
-class MovieFragment : Fragment(), MovieView, MovieAdapter.OnItemClickListener {
+class MovieFragment : Fragment(), MovieView {
 
     lateinit var progress: ProgressDialog
     private lateinit var mAdapter: MovieAdapter
@@ -46,6 +48,13 @@ class MovieFragment : Fragment(), MovieView, MovieAdapter.OnItemClickListener {
         }
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        if (outState != null) {
+            outState.putParcelableArrayList(KEY_MOVIE, dataGlobal)
+        }
+    }
+
     override fun getData() {
         mPresenter.getDataMovie()
     }
@@ -65,13 +74,11 @@ class MovieFragment : Fragment(), MovieView, MovieAdapter.OnItemClickListener {
     }
 
     override fun showData(data: ArrayList<MovieResponse.ResultMovie>) {
-        mAdapter = MovieAdapter(data)
+        mAdapter = MovieAdapter(data) {
+            startActivity(intentFor<DetailActivity>("name" to it))
+        }
         view?.rv_movie?.adapter = mAdapter
-        mAdapter.setOnItemClickListener(this)
+        mAdapter.notifyDataSetChanged()
         this.dataGlobal = data
-    }
-
-    override fun onItemClick(pos: Int) {
-        toast(pos.toString())
     }
 }

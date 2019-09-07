@@ -15,11 +15,13 @@ import com.gdk.moviecatalogue.adapter.TvAdapter
 import com.gdk.moviecatalogue.model.TvResponse
 import com.gdk.moviecatalogue.presenter.TvPresenter
 import com.gdk.moviecatalogue.services.BaseApi
+import com.gdk.moviecatalogue.ui.activity.DetailActivity
 import com.gdk.moviecatalogue.view.TvView
 import kotlinx.android.synthetic.main.fragment_tv.view.*
+import org.jetbrains.anko.support.v4.intentFor
 import org.jetbrains.anko.support.v4.toast
 
-class TvFragment : Fragment(), TvView, TvAdapter.OnItemClickListener {
+class TvFragment : Fragment(), TvView {
 
     lateinit var progress: ProgressDialog
     private lateinit var mAdapter: TvAdapter
@@ -65,13 +67,11 @@ class TvFragment : Fragment(), TvView, TvAdapter.OnItemClickListener {
     }
 
     override fun showData(data: ArrayList<TvResponse.ResultTvShow>) {
-        mAdapter = TvAdapter(data)
+        mAdapter = TvAdapter(data) {
+            startActivity(intentFor<DetailActivity>("TV" to it))
+        }
         view?.rv_tv_show?.adapter = mAdapter
-        mAdapter.setOnItemClickListener(this)
+        mAdapter.notifyDataSetChanged()
         this.dataGlobal = data
-    }
-
-    override fun onItemClick(pos: Int) {
-        toast(pos.toString())
     }
 }
