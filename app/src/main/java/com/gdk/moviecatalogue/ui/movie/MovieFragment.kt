@@ -1,4 +1,4 @@
-package com.gdk.moviecatalogue.ui.fragment
+package com.gdk.moviecatalogue.ui.movie
 
 import android.annotation.SuppressLint
 import android.app.ProgressDialog
@@ -15,7 +15,6 @@ import com.gdk.moviecatalogue.adapter.MovieAdapter
 import com.gdk.moviecatalogue.model.MovieResponse
 import com.gdk.moviecatalogue.presenter.MoviePresenter
 import com.gdk.moviecatalogue.services.BaseApi
-import com.gdk.moviecatalogue.ui.activity.DetailActivity
 import com.gdk.moviecatalogue.view.MovieView
 import kotlinx.android.synthetic.main.fragment_movie.view.*
 import org.jetbrains.anko.support.v4.intentFor
@@ -64,7 +63,8 @@ class MovieFragment : Fragment(), MovieView {
     }
 
     override fun showProgress() {
-        progress = ProgressDialog(activity)
+        progress = ProgressDialog(activity, R.style.CustomProgressDialog)
+        progress.setCanceledOnTouchOutside(false)
         progress.setMessage("Please wait...")
         progress.show()
     }
@@ -75,7 +75,7 @@ class MovieFragment : Fragment(), MovieView {
 
     override fun showData(data: ArrayList<MovieResponse.ResultMovie>) {
         mAdapter = MovieAdapter(data) {
-            startActivity(intentFor<DetailActivity>("name" to it))
+            startActivity(intentFor<DetailMovieActivity>("name" to it))
         }
         view?.rv_movie?.adapter = mAdapter
         mAdapter.notifyDataSetChanged()

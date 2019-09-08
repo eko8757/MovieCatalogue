@@ -6,21 +6,21 @@
     <item
         android:id="@+id/action_movie"
         android:enabled="true"
-        android:icon="@drawable/ic_movie_64"
+        android:icon="@drawable/ic_movie_black_24dp"
         app:showAsAction="ifRoom"
-        tools:ignore="MenuTitle" />
+        android:title="Movie"/>
 
     <item
         android:id="@+id/action_tv"
         android:enabled="true"
-        android:icon="@drawable/ic_tv_64"
+        android:icon="@drawable/ic_live_tv_black_24dp"
         app:showAsAction="ifRoom"
-        tools:ignore="MenuTitle"/>
+        android:title="Tv Show"/>
 
     <item
         android:id="@+id/action_favorites"
         android:enabled="true"
-        android:icon="@drawable/ic_start_white_64"
+        android:icon="@drawable/ic_star_border_black_24dp"
         app:showAsAction="ifRoom"
-        tools:ignore="MenuTitle"/>
+        android:title="Favorite"/>
 </menu>

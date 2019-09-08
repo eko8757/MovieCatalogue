@@ -1,4 +1,4 @@
-package com.gdk.moviecatalogue.ui.fragment.favorites
+package com.gdk.moviecatalogue.ui.favorites
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

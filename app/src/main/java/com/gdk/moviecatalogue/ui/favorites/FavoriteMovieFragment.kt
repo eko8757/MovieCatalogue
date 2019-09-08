@@ -1,7 +1,5 @@
-package com.gdk.moviecatalogue.ui.fragment.favorites
+package com.gdk.moviecatalogue.ui.favorites
 
-import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater

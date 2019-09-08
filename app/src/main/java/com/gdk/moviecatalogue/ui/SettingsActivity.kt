@@ -1,4 +1,4 @@
-package com.gdk.moviecatalogue.ui.activity
+package com.gdk.moviecatalogue.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

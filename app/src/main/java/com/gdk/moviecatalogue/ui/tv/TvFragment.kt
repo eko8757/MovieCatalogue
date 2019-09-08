@@ -1,4 +1,4 @@
-package com.gdk.moviecatalogue.ui.fragment
+package com.gdk.moviecatalogue.ui.tv
 
 import android.annotation.SuppressLint
 import android.app.ProgressDialog
@@ -15,7 +15,7 @@ import com.gdk.moviecatalogue.adapter.TvAdapter
 import com.gdk.moviecatalogue.model.TvResponse
 import com.gdk.moviecatalogue.presenter.TvPresenter
 import com.gdk.moviecatalogue.services.BaseApi
-import com.gdk.moviecatalogue.ui.activity.DetailActivity
+import com.gdk.moviecatalogue.ui.movie.DetailMovieActivity
 import com.gdk.moviecatalogue.view.TvView
 import kotlinx.android.synthetic.main.fragment_tv.view.*
 import org.jetbrains.anko.support.v4.intentFor
@@ -57,7 +57,8 @@ class TvFragment : Fragment(), TvView {
     }
 
     override fun showProgress() {
-        progress = ProgressDialog(activity)
+        progress = ProgressDialog(activity, R.style.CustomProgressDialog)
+        progress.setCanceledOnTouchOutside(false)
         progress.setMessage("Please wait...")
         progress.show()
     }
@@ -68,7 +69,7 @@ class TvFragment : Fragment(), TvView {
 
     override fun showData(data: ArrayList<TvResponse.ResultTvShow>) {
         mAdapter = TvAdapter(data) {
-            startActivity(intentFor<DetailActivity>("TV" to it))
+            startActivity(intentFor<DetailTvActivity>("name" to it))
         }
         view?.rv_tv_show?.adapter = mAdapter
         mAdapter.notifyDataSetChanged()

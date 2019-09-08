@@ -1,4 +1,4 @@
-package com.gdk.moviecatalogue.ui.activity
+package com.gdk.moviecatalogue.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -8,12 +8,13 @@ import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.gdk.moviecatalogue.R
-import com.gdk.moviecatalogue.ui.fragment.MovieFragment
-import com.gdk.moviecatalogue.ui.fragment.TvFragment
-import com.gdk.moviecatalogue.ui.fragment.favorites.FavoriteFragment
+import com.gdk.moviecatalogue.ui.movie.MovieFragment
+import com.gdk.moviecatalogue.ui.tv.TvFragment
+import com.gdk.moviecatalogue.ui.favorites.FavoriteFragment
+import com.gdk.moviecatalogue.util.BottomNavigationViewListener
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), BottomNavigationViewListener {
 
     private lateinit var fragment: Fragment
     private lateinit var fragmentManager: FragmentManager
@@ -52,5 +53,21 @@ class MainActivity : AppCompatActivity() {
             startActivity(i)
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun showBottomNavigationView() {
+        if (main_bottom_navigation.translationY >= main_bottom_navigation.height.toFloat())
+            main_bottom_navigation.animate()
+                .translationY(0f)
+                .setDuration(400)
+                .start()
+    }
+
+    override fun hideBottomNavigationView() {
+        if (main_bottom_navigation.translationY == 0f)
+            main_bottom_navigation.animate()
+                .translationY(main_bottom_navigation.height.toFloat())
+                .setDuration(250)
+                .start()
     }
 }

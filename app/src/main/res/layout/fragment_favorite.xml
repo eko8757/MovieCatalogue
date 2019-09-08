@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.fragment.favorites.FavoriteFragment">
+    tools:context=".ui.favorites.FavoriteFragment">
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_favorite"
@@ -15,9 +15,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tabTextColor="@color/colorPrimary"
+        app:tabBackground="@color/colorPrimaryDark"
+        app:tabTextColor="@color/text_color_light"
         app:layout_constraintBottom_toTopOf="@id/vp_favorite"
-        app:tabSelectedTextColor="@color/colorPrimaryDark"
+        app:tabSelectedTextColor="@color/colorAccent"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
     <androidx.viewpager.widget.ViewPager

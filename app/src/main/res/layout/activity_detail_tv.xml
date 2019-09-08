@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activity.DetailActivity">
+    android:background="@color/colorPrimaryDark"
+    tools:context=".ui.tv.DetailTvActivity">
 
-    <!--image movie/tv show-->
+    <!--image-->
     <ImageView
         android:id="@+id/img_detail"
         android:layout_width="150dp"
@@ -16,16 +17,18 @@
         app:layout_constraintTop_toBottomOf="@id/guideline_top"
         tools:ignore="ContentDescription" />
 
-    <!--title movie/tv show-->
+    <!--title tv-->
     <TextView
         android:id="@+id/tv_title_detail"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:textColor="@color/text_color_light"
         android:textAppearance="@style/TextAppearance.AppCompat.Title"
         android:textSize="@dimen/font_normal"
         app:layout_constraintStart_toEndOf="@id/img_detail"
         app:layout_constraintTop_toBottomOf="@id/guideline_top"
+        app:layout_constraintEnd_toStartOf="@id/guideline_right"
         tools:text="Title" />
 
     <!--release date-->
@@ -33,6 +36,7 @@
         android:id="@+id/tv_release_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/text_color_light"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         app:layout_constraintStart_toStartOf="@id/tv_title_detail"
         app:layout_constraintTop_toBottomOf="@id/tv_title_detail"
@@ -43,8 +47,9 @@
         android:id="@+id/tv_title_desc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="Overview:"
-        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+        android:text="Overview:"
+        android:textColor="@color/text_color_light"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
         app:layout_constraintStart_toEndOf="@id/guideline_left"
         app:layout_constraintTop_toBottomOf="@id/img_detail"
         android:layout_marginTop="16dp"
@@ -54,6 +59,7 @@
         android:id="@+id/tv_desc_detail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:textColor="@color/text_color_light"
         app:layout_constraintStart_toEndOf="@id/guideline_left"
         app:layout_constraintEnd_toStartOf="@id/guideline_right"
         app:layout_constraintTop_toBottomOf="@id/tv_title_desc"
@@ -80,6 +86,5 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="24dp" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
