@@ -21,6 +21,7 @@ class DetailTvActivity : AppCompatActivity() {
         tv_title_detail.text = items?.title
         tv_release_date.text = items?.first_air_date
         tv_desc_detail.text = items?.overview
+        tv_vote_average.text = items?.vote_average.toString()
 
         val API_URL = BuildConfig.MOVIE_PATH
         Picasso.get().load(API_URL + items?.poster_path).into(img_detail)

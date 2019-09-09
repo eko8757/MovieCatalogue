@@ -1,90 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark"
+    android:fillViewport="true"
     tools:context=".ui.tv.DetailTvActivity">
 
-    <!--image-->
-    <ImageView
-        android:id="@+id/img_detail"
-        android:layout_width="150dp"
-        android:layout_height="220dp"
-        android:background="@android:color/darker_gray"
-        app:layout_constraintStart_toEndOf="@id/guideline_left"
-        app:layout_constraintTop_toBottomOf="@id/guideline_top"
-        tools:ignore="ContentDescription" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <!--image-->
+        <ImageView
+            android:id="@+id/img_detail"
+            android:layout_width="150dp"
+            android:layout_height="220dp"
+            android:background="@android:color/darker_gray"
+            app:layout_constraintStart_toEndOf="@id/guideline_left"
+            app:layout_constraintTop_toBottomOf="@id/guideline_top"
+            tools:ignore="ContentDescription" />
 
-    <!--title tv-->
-    <TextView
-        android:id="@+id/tv_title_detail"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:textColor="@color/text_color_light"
-        android:textAppearance="@style/TextAppearance.AppCompat.Title"
-        android:textSize="@dimen/font_normal"
-        app:layout_constraintStart_toEndOf="@id/img_detail"
-        app:layout_constraintTop_toBottomOf="@id/guideline_top"
-        app:layout_constraintEnd_toStartOf="@id/guideline_right"
-        tools:text="Title" />
+        <!--title tv-->
+        <TextView
+            android:id="@+id/tv_title_detail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textColor="@color/text_color_light"
+            android:textSize="@dimen/font_normal"
+            app:layout_constraintEnd_toStartOf="@id/guideline_right"
+            app:layout_constraintStart_toEndOf="@id/img_detail"
+            app:layout_constraintTop_toBottomOf="@id/guideline_top"
+            tools:text="Title" />
 
-    <!--release date-->
-    <TextView
-        android:id="@+id/tv_release_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/text_color_light"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        app:layout_constraintStart_toStartOf="@id/tv_title_detail"
-        app:layout_constraintTop_toBottomOf="@id/tv_title_detail"
-        tools:text="7-9-2019" />
+        <!--release date-->
+        <TextView
+            android:id="@+id/title_release_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Release Date: "
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="@color/text_color_light"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@id/tv_title_detail"
+            app:layout_constraintTop_toBottomOf="@id/tv_title_detail" />
 
-    <!--description-->
-    <TextView
-        android:id="@+id/tv_title_desc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Overview:"
-        android:textColor="@color/text_color_light"
-        android:textAppearance="@style/TextAppearance.AppCompat.Title"
-        app:layout_constraintStart_toEndOf="@id/guideline_left"
-        app:layout_constraintTop_toBottomOf="@id/img_detail"
-        android:layout_marginTop="16dp"
-        android:textSize="@dimen/font_normal"/>
+        <TextView
+            android:id="@+id/tv_release_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="@color/text_color_light"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@id/title_release_date"
+            app:layout_constraintEnd_toStartOf="@id/guideline_right"
+            app:layout_constraintStart_toEndOf="@id/title_release_date"
+            app:layout_constraintTop_toTopOf="@id/title_release_date"
+            tools:text="7-9-2019" />
 
-    <TextView
-        android:id="@+id/tv_desc_detail"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:textColor="@color/text_color_light"
-        app:layout_constraintStart_toEndOf="@id/guideline_left"
-        app:layout_constraintEnd_toStartOf="@id/guideline_right"
-        app:layout_constraintTop_toBottomOf="@id/tv_title_desc"
-        tools:text="Lorem ipsum dolor sit amet"
-        android:textAlignment="textStart"/>
+        <!--vote average-->
+        <TextView
+            android:id="@+id/title_vote_average"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Vote Aveage: "
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="@color/text_color_light"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@id/tv_title_detail"
+            app:layout_constraintTop_toBottomOf="@id/title_release_date" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_left"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="16dp" />
+        <TextView
+            android:id="@+id/tv_vote_average"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="@color/text_color_light"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@id/title_vote_average"
+            app:layout_constraintEnd_toStartOf="@id/guideline_right"
+            app:layout_constraintStart_toEndOf="@id/title_vote_average"
+            app:layout_constraintTop_toTopOf="@id/title_vote_average"
+            tools:text="6.7" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_right"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_end="16dp" />
+        <!--description-->
+        <TextView
+            android:id="@+id/tv_title_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Overview:"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textColor="@color/text_color_light"
+            android:textSize="@dimen/font_normal"
+            app:layout_constraintStart_toEndOf="@id/guideline_left"
+            app:layout_constraintTop_toBottomOf="@id/img_detail" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_top"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="24dp" />
+        <TextView
+            android:id="@+id/tv_desc_detail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAlignment="textStart"
+            android:textColor="@color/text_color_light"
+            app:layout_constraintEnd_toStartOf="@id/guideline_right"
+            app:layout_constraintStart_toEndOf="@id/guideline_left"
+            app:layout_constraintTop_toBottomOf="@id/tv_title_desc"
+            tools:text="Lorem ipsum dolor sit amet" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="16dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="16dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="24dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>
