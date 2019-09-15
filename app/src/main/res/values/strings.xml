@@ -1,11 +1,15 @@
 <resources>
-    <string name="app_name">Movie Catalogue</string>
+    <string name="app_name" translatable="false">MADE Catalogue</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_dialog">Keluar</string>
-    <string name="content_dialog">Apakah Anda yakin untuk keluar dari akun ini?</string>
-    <string name="text_btn_cancel">Batal</string>
-    <string name="text_btn_yes">Ya</string>
+    <string name="release_date" translatable="false">Release Date:</string>
+    <string name="vote_aveage" translatable="false">Vote Average:</string>
+    <string name="overview" translatable="false">Overview:</string>
+    <string name="settings" translatable="false">Settings</string>
+    <string name="movie_title" translatable="false">Detail Movie</string>
+    <string name="tv_title" translatable="false">Detail Tv</string>
+    <string name="add_to_favorite" translatable="false">Added Favorite</string>
+    <string name="delete_from_favorite" translatable="false">Deleted Favorite</string>
+    <string name="loading_message" translatable="false">Please wait...</string>
 
 </resources>

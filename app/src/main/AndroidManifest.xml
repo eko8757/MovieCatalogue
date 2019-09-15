@@ -16,15 +16,15 @@
         <activity android:name=".ui.MainActivity"/>
         <activity
             android:name=".ui.tv.DetailTvActivity"
-            android:label="Detail Tv"
+            android:label="@string/tv_title"
             android:parentActivityName=".ui.MainActivity" />
         <activity
             android:name=".ui.SettingsActivity"
-            android:label="Settings"
+            android:label="@string/settings"
             android:parentActivityName=".ui.MainActivity" />
         <activity
             android:name=".ui.movie.DetailMovieActivity"
-            android:label="Detail Movie"
+            android:label="@string/movie_title"
             android:parentActivityName=".ui.MainActivity" />
         <activity android:name=".ui.SplashScreen"
             android:theme="@style/SplashTheme">

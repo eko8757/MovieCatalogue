@@ -11,6 +11,7 @@ import com.gdk.moviecatalogue.presenter.tv.DetailPresenterTv
 import com.gdk.moviecatalogue.view.DetailView
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_detail_tv.*
+import org.jetbrains.anko.toast
 
 class DetailTvActivity : AppCompatActivity(), DetailView.ViewTVShow {
 
@@ -82,10 +83,12 @@ class DetailTvActivity : AppCompatActivity(), DetailView.ViewTVShow {
 
     override fun addFavorite() {
         mPresenter.setFavorite(applicationContext)
+        toast(getString(R.string.add_to_favorite))
     }
 
     override fun removeFavorite() {
         mPresenter.unsetFavorite(applicationContext)
+        toast(getString(R.string.delete_from_favorite))
     }
 
     override fun getFavorite() {

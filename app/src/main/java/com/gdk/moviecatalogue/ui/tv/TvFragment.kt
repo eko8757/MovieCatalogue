@@ -59,7 +59,7 @@ class TvFragment : Fragment(), MainView.TvShowView, TvAdapter.OnItemClickListene
     override fun showProgress() {
         progress = ProgressDialog(activity, R.style.CustomProgressDialog)
         progress.setCanceledOnTouchOutside(false)
-        progress.setMessage("Please wait...")
+        progress.setMessage(getString(R.string.loading_message))
         progress.show()
     }
 

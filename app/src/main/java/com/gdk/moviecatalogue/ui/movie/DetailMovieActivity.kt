@@ -11,6 +11,7 @@ import com.gdk.moviecatalogue.presenter.movie.DetailPresenterMovie
 import com.gdk.moviecatalogue.view.DetailView
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_detail_movie.*
+import org.jetbrains.anko.toast
 
 class DetailMovieActivity : AppCompatActivity(), DetailView.ViewMovie {
 
@@ -81,6 +82,7 @@ class DetailMovieActivity : AppCompatActivity(), DetailView.ViewMovie {
 
     override fun addFavorite() {
         mPresenter.setFavorite(applicationContext)
+        toast(getString(R.string.add_to_favorite))
     }
 
     override fun getFavorite() {
@@ -91,5 +93,6 @@ class DetailMovieActivity : AppCompatActivity(), DetailView.ViewMovie {
 
     override fun removeFavorite() {
         mPresenter.unsetFavorite(applicationContext)
+        toast(getString(R.string.delete_from_favorite))
     }
 }
