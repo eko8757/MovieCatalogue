@@ -1,7 +1,7 @@
 package com.gdk.moviecatalogue.services
 
-import com.gdk.moviecatalogue.model.MovieResponse
-import com.gdk.moviecatalogue.model.TvResponse
+import com.gdk.moviecatalogue.model.ResponseMovie
+import com.gdk.moviecatalogue.model.ResponseTv
 import com.google.gson.GsonBuilder
 import io.reactivex.Observable
 import okhttp3.OkHttpClient
@@ -18,13 +18,13 @@ interface BaseApi {
     fun getDiscoverMovie(
         @Query("api_key") api_key: String,
         @Query("language") language: String
-    ) : Observable<MovieResponse>
+    ) : Observable<ResponseMovie>
 
     @GET("tv/popular?")
     fun getDiscoverTv(
         @Query("api_key") api_key: String,
         @Query("language") language: String
-    ) : Observable<TvResponse>
+    ) : Observable<ResponseTv>
 
     companion object {
         var URL: String = "https://api.themoviedb.org/3/"

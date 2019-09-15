@@ -1,46 +1,53 @@
-package com.gdk.moviecatalogue.presenter
+package com.gdk.moviecatalogue.presenter.movie
 
+import android.content.Context
+import android.content.Intent
 import com.gdk.moviecatalogue.BuildConfig
-import com.gdk.moviecatalogue.model.MovieResponse
+import com.gdk.moviecatalogue.model.ResponseMovie
 import com.gdk.moviecatalogue.services.BaseApi
-import com.gdk.moviecatalogue.view.MovieView
+import com.gdk.moviecatalogue.ui.movie.DetailMovieActivity
+import com.gdk.moviecatalogue.view.MainView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableObserver
 import io.reactivex.schedulers.Schedulers
 
-class MoviePresenter(val view: MovieView, var factory: BaseApi) {
+class MoviePresenter(val view: MainView.MovieView, var factory: BaseApi) : MainView.MoviePresenter {
     private var myCompositeDisposable: CompositeDisposable? = null
-    private var movieList = ArrayList<MovieResponse.ResultMovie>()
+    private var movieList: ArrayList<ResponseMovie.ResultMovie>? = null
 
-    fun getDataMovie() {
+    override fun getMovie() {
         view.showProgress()
         myCompositeDisposable = CompositeDisposable()
         myCompositeDisposable?.add(
             factory.getDiscoverMovie(BuildConfig.MOVIE_API_KEY, "en-US")
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribeWith(object : DisposableObserver<MovieResponse>() {
+                .subscribeWith(object : DisposableObserver<ResponseMovie>() {
                     override fun onComplete() {
                         view.hideProgress()
                     }
 
-                    override fun onNext(t: MovieResponse) {
-                        view.showData(t.results as ArrayList<MovieResponse.ResultMovie>)
+                    override fun onNext(t: ResponseMovie) {
+                        view.showData(t.results as ArrayList<ResponseMovie.ResultMovie>)
                         movieList = if (t.results == null) {
                             ArrayList()
                         } else {
-                            t.results as ArrayList<MovieResponse.ResultMovie>
+                            t.results as ArrayList<ResponseMovie.ResultMovie>
                         }
                         view.hideProgress()
                     }
 
                     override fun onError(e: Throwable) {
-                        view.makeToast(e.message.toString())
                         view.hideProgress()
                     }
                 })
         )
     }
 
+    override fun goToDetailMovie(context: Context, position: Int) {
+        val i = Intent(context, DetailMovieActivity::class.java)
+        i.putExtra("Data", movieList?.get(position))
+        context.startActivity(i)
+    }
 }

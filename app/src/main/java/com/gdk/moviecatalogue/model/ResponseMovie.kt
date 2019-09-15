@@ -1,27 +1,37 @@
 package com.gdk.moviecatalogue.model
 
 import android.os.Parcelable
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
-class MovieResponse {
+class ResponseMovie {
     @SerializedName("page")
+    @Expose
     var page: Int? = 0
 
     @SerializedName("total_results")
+    @Expose
     var total_result: Long? = 0
 
     @SerializedName("total_page")
+    @Expose
     var total_page: Long? = 0
 
     @SerializedName("results")
+    @Expose
     var results: List<ResultMovie>? = null
 
+    @Entity(tableName = "db_movie")
     @Parcelize
     data class ResultMovie(
+
         @SerializedName("vote_count")
         var vote_count: Long? = 0,
 
+        @PrimaryKey
         @SerializedName("id")
         var id: Long? = 0,
 

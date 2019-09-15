@@ -12,25 +12,21 @@ import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.gdk.moviecatalogue.R
 import com.gdk.moviecatalogue.adapter.TvAdapter
-import com.gdk.moviecatalogue.model.TvResponse
-import com.gdk.moviecatalogue.presenter.TvPresenter
+import com.gdk.moviecatalogue.model.ResponseTv
+import com.gdk.moviecatalogue.presenter.tv.TvPresenter
 import com.gdk.moviecatalogue.services.BaseApi
-import com.gdk.moviecatalogue.ui.movie.DetailMovieActivity
-import com.gdk.moviecatalogue.view.TvView
+import com.gdk.moviecatalogue.view.MainView
 import kotlinx.android.synthetic.main.fragment_tv.view.*
-import org.jetbrains.anko.support.v4.intentFor
-import org.jetbrains.anko.support.v4.toast
 
-class TvFragment : Fragment(), TvView {
+class TvFragment : Fragment(), MainView.TvShowView, TvAdapter.OnItemClickListener {
 
     lateinit var progress: ProgressDialog
     private lateinit var mAdapter: TvAdapter
     private lateinit var mPresenter: TvPresenter
-    private lateinit var dataGlobal: ArrayList<TvResponse.ResultTvShow>
+    private lateinit var dataGlobal: ArrayList<ResponseTv.ResultTvShow>
     private val KEY_TV = "DataTv"
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_tv, container, false)
     }
 
@@ -38,7 +34,7 @@ class TvFragment : Fragment(), TvView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var factory: BaseApi = BaseApi.create()
+        val factory: BaseApi = BaseApi.create()
         view.rv_tv_show.layoutManager = LinearLayoutManager(context, LinearLayout.VERTICAL, false)
         if (savedInstanceState != null) {
             showData(savedInstanceState.getParcelableArrayList(KEY_TV))
@@ -47,13 +43,17 @@ class TvFragment : Fragment(), TvView {
             getData()
         }
     }
-
-    override fun getData() {
-        mPresenter.getDataTv()
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putParcelableArrayList(KEY_TV, dataGlobal)
     }
 
-    override fun makeToast(msg: String) {
-        toast(msg)
+    override fun onItemClickListener(position: Int) {
+        context?.let { mPresenter.goToDetailTvShow(it, position) }
+    }
+
+    override fun getData() {
+        mPresenter.getTvShow()
     }
 
     override fun showProgress() {
@@ -67,12 +67,10 @@ class TvFragment : Fragment(), TvView {
         progress.dismiss()
     }
 
-    override fun showData(data: ArrayList<TvResponse.ResultTvShow>) {
-        mAdapter = TvAdapter(data) {
-            startActivity(intentFor<DetailTvActivity>("name" to it))
-        }
+    override fun showData(data: ArrayList<ResponseTv.ResultTvShow>) {
+        mAdapter = TvAdapter(data)
         view?.rv_tv_show?.adapter = mAdapter
-        mAdapter.notifyDataSetChanged()
+        mAdapter.setOnItemClickListener(this)
         this.dataGlobal = data
     }
 }
