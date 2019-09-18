@@ -8,52 +8,161 @@
     tools:context=".ui.SettingsActivity">
 
     <TextView
+        android:id="@+id/tv_title_language"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Language"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/tv_lg_indonesian"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:text="Indonesia"
         android:textAppearance="@style/TextAppearance.AppCompat.Title"
-        android:textSize="16sp"
         android:textColor="@android:color/white"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"/>
+        app:layout_constraintTop_toBottomOf="@+id/tv_title_language" />
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/sw_indonesian"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         android:layout_marginEnd="16dp"
-        android:layout_marginTop="24dp"
         android:clickable="true"
-        android:focusable="true"/>
-sw
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_lg_indonesian"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_lg_indonesian" />
+
     <TextView
         android:id="@+id/tv_lg_english"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="English"
         android:textAppearance="@style/TextAppearance.AppCompat.Title"
-        android:textSize="16sp"
         android:textColor="@android:color/white"
-        app:layout_constraintStart_toStartOf="@id/tv_lg_indonesian"
-        app:layout_constraintEnd_toEndOf="@id/tv_lg_indonesian"
-        app:layout_constraintTop_toBottomOf="@id/tv_lg_indonesian"
-        android:layout_marginTop="14dp"/>
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/tv_lg_indonesian"
+        app:layout_constraintStart_toStartOf="@+id/tv_lg_indonesian"
+        app:layout_constraintTop_toBottomOf="@+id/tv_lg_indonesian" />
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/sw_english"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
+        android:layout_marginEnd="16dp"
         android:clickable="true"
         android:focusable="true"
-        app:layout_constraintTop_toBottomOf="@id/sw_indonesian"
-        app:layout_constraintEnd_toEndOf="@id/sw_indonesian"
-        app:layout_constraintStart_toStartOf="@id/sw_indonesian"/>
+        app:layout_constraintBottom_toBottomOf="@+id/tv_lg_english"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_lg_english" />
 
+    <View
+        android:id="@+id/view2"
+        android:layout_width="0dp"
+        android:layout_height="1.5dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_lg_english" />
+
+    <TextView
+        android:id="@+id/title_reminder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Reminder"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view2" />
+
+    <TextView
+        android:id="@+id/tv_release_reminder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Release Reminder"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_reminder" />
+
+    <TextView
+        android:id="@+id/tv_content_release_reminder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Reminder showing the movie released today "
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="@android:color/white"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_release_reminder"
+        app:layout_constraintTop_toBottomOf="@+id/tv_release_reminder" />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/sw_release_reminder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_content_release_reminder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_release_reminder" />
+
+    <TextView
+        android:id="@+id/tv_daily_reminder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Daily Reminder"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_content_release_reminder" />
+
+    <TextView
+        android:id="@+id/tv_content_daily_reminder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Reminder for return to app"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="@android:color/white"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_daily_reminder"
+        app:layout_constraintTop_toBottomOf="@+id/tv_daily_reminder" />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/sw_daily_reminder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_content_daily_reminder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_daily_reminder" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

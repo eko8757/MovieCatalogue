@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name" translatable="false">MADE Catalogue</string>
 
     <!-- TODO: Remove or change this placeholder text -->
@@ -13,5 +13,20 @@
     <string name="loading_message" translatable="false">Please wait...</string>
     <string name="title_movie_pager" translatable="false">Movie</string>
     <string name="title_tv_pager" translatable="false">Tv Show</string>
+    <string name="appwidget_text" translatable="false">EXAMPLE</string>
+    <string name="add_widget" translatable="false">Add widget</string>
+
+    <string name="daily_notification" tools:ignore="MissingTranslation">we miss you :( don\'t forget to check out your favorite movie or tv show</string>
+    <string name="information" tools:ignore="MissingTranslation">Info</string>
+    <string name="setting" tools:ignore="MissingTranslation">Settings</string>
+    <string name="languange" tools:ignore="MissingTranslation">Language</string>
+
+    <string name="daily_reminder" tools:ignore="MissingTranslation">Daily Reminder</string>
+    <string name="daily_reminder_sub" tools:ignore="MissingTranslation">Reminder to get interesting offer</string>
+    <string name="release_reminder" tools:ignore="MissingTranslation">Release Reminder</string>
+    <string name="release_reminder_sub" tools:ignore="MissingTranslation">Reminder to get latest movie release </string>
+    <string name="release_today_title" tools:ignore="MissingTranslation">Release Today</string>
+    <string name="no_movie_found" tools:ignore="MissingTranslation">No New Movie</string>
+    <string name="empty_text" tools:ignore="MissingTranslation">-</string>
 
 </resources>

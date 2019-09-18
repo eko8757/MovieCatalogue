@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.widget.CompoundButton
 import com.gdk.moviecatalogue.R
 import kotlinx.android.synthetic.main.activity_settings.*
+import org.jetbrains.anko.toast
 import java.util.*
 
 class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeListener {
@@ -21,6 +22,8 @@ class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeList
         config = baseContext.resources.configuration
         sw_indonesian.setOnCheckedChangeListener(this)
         sw_english.setOnCheckedChangeListener(this)
+        sw_release_reminder.setOnCheckedChangeListener(this)
+        sw_daily_reminder.setOnCheckedChangeListener(this)
     }
 
     override fun onCheckedChanged(buttonView: CompoundButton?, isChecked: Boolean) {
@@ -40,6 +43,18 @@ class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeList
                     locale = Locale("en")
                     config.locale = locale
                     baseContext.resources.updateConfiguration(config, baseContext.resources.displayMetrics)
+                }
+            }
+
+            R.id.sw_release_reminder -> {
+                if (isChecked) {
+                    toast("Reminder on")
+                }
+            }
+
+            R.id.sw_daily_reminder -> {
+                if (isChecked) {
+                    toast("Reminder on")
                 }
             }
         }
