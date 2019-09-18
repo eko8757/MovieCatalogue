@@ -50,4 +50,33 @@ class MoviePresenter(val view: MainView.MovieView, var factory: BaseApi) : MainV
         i.putExtra("Data", movieList?.get(position))
         context.startActivity(i)
     }
+
+    override fun getData(query: String) {
+        view.showProgress()
+        myCompositeDisposable = CompositeDisposable()
+        myCompositeDisposable?.add(
+            factory.searchMovie(BuildConfig.MOVIE_API_KEY, "en-US", query)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribeWith(object : DisposableObserver<ResponseMovie>() {
+                    override fun onComplete() {
+                        view.hideProgress()
+                    }
+
+                    override fun onNext(t: ResponseMovie) {
+                        view.showData(t.results as ArrayList<ResponseMovie.ResultMovie>)
+                        movieList = if (t.results == null) {
+                            ArrayList()
+                        } else {
+                            t.results as ArrayList<ResponseMovie.ResultMovie>
+                        }
+                        view.hideProgress()
+                    }
+
+                    override fun onError(e: Throwable) {
+                        view.hideProgress()
+                    }
+                })
+        )
+    }
 }

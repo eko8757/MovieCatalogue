@@ -10,4 +10,6 @@
     <string name="add_to_favorite" translatable="false">Ditambahkan ke favorite</string>
     <string name="delete_from_favorite" translatable="false">Dihapus dari favorite</string>
     <string name="loading_message" translatable="false">Tunggu sebentar...</string>
+    <string name="title_movie_pager" translatable="false">Film</string>
+    <string name="title_tv_pager" translatable="false">Acara Tv</string>
 </resources>

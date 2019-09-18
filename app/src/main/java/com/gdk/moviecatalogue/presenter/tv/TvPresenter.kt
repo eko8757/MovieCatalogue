@@ -50,4 +50,33 @@ class TvPresenter(val view: MainView.TvShowView, var factory: BaseApi) : MainVie
         i.putExtra("Data", tvList?.get(position))
         context.startActivity(i)
     }
+
+    override fun getData(query: String) {
+        view.showProgress()
+        myCompositeDisposable = CompositeDisposable()
+        myCompositeDisposable?.add(
+            factory.searchTv(BuildConfig.MOVIE_API_KEY, "en-US", query)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribeWith(object : DisposableObserver<ResponseTv>() {
+                    override fun onComplete() {
+                        view.hideProgress()
+                    }
+
+                    override fun onNext(t: ResponseTv) {
+                        view.showData(t.results as ArrayList<ResponseTv.ResultTvShow>)
+                        tvList = if (t.results == null) {
+                            ArrayList()
+                        } else {
+                            t.results as ArrayList<ResponseTv.ResultTvShow>
+                        }
+                        view.hideProgress()
+                    }
+
+                    override fun onError(e: Throwable) {
+                        view.hideProgress()
+                    }
+                })
+        )
+    }
 }

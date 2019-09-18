@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationViewListener {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.settings_menu, menu)
+        menuInflater.inflate(R.menu.action_menu, menu)
         return super.onCreateOptionsMenu(menu)
     }
 

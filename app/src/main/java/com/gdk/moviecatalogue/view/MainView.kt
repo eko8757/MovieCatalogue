@@ -13,6 +13,7 @@ interface MainView {
     }
 
     interface MoviePresenter {
+        fun getData(query: String)
         fun getMovie()
         fun goToDetailMovie(context: Context, position: Int)
     }
@@ -30,6 +31,7 @@ interface MainView {
     }
 
     interface TvShowPresenter {
+        fun getData(query: String)
         fun getTvShow()
         fun goToDetailTvShow(context: Context, position: Int)
     }

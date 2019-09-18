@@ -32,9 +32,9 @@ class FavoriteFragment : Fragment() {
             PagerAdapter(it)
         }
         val movie = FavoriteMovieFragment.movieFavoriteInstance()
-        adapter?.addFragment(movie, "Movie")
+        adapter?.addFragment(movie, getString(R.string.title_movie_pager))
         val tv = FavoriteTvFragment.tvFavoriteInstance()
-        adapter?.addFragment(tv, "Tv Show")
+        adapter?.addFragment(tv, getString(R.string.title_tv_pager))
         pager.adapter = adapter
     }
 }
