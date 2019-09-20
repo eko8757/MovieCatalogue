@@ -1,5 +1,6 @@
 package com.gdk.moviecatalogue.model.dao
 
+import android.database.Cursor
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
@@ -19,4 +20,7 @@ interface TvDao {
 
     @Query("DELETE FROM db_tv WHERE id == :id")
     fun removeData(id : Long)
+
+    @Query("SELECT * FROM db_tv")
+    fun getAllTvCursor() : Cursor
 }

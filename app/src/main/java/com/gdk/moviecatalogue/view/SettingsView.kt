@@ -7,6 +7,8 @@ interface SettingsView {
     interface ViewSetting {
         fun setDailyAlarm()
         fun setReleaseMovieToday()
+        fun setEnglish()
+        fun setIndonesian()
         fun showProgress()
         fun hideProgress()
     }

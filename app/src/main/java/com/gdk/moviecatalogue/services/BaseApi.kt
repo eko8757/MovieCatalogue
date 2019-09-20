@@ -41,7 +41,7 @@ interface BaseApi {
     ): Observable<ResponseTv>
 
     @GET("discover/movie?")
-    fun movieReleaseToday(
+    fun releaseToday(
         @Query("api_key") api_key: String,
         @Query("primary_release_date.lte") gte: String,
         @Query("primary_release_date.gte") lte: String

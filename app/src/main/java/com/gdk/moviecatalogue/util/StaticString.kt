@@ -11,5 +11,8 @@ class StaticString {
         const val TODAY_MOVIE_ALARM_ON = "todayalarmaon"
         const val SCHEME = "content"
         const val AUTHOR = "com.gdk.moviecatalogue"
+
+        const val ENGLISH_LANGUAGE = "english"
+        const val INDONESIAN_LANGUAGE = "indonesian"
     }
 }

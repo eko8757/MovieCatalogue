@@ -1,6 +1,7 @@
 package com.gdk.moviecatalogue.alarm
 
 import android.app.AlarmManager
+import android.app.PendingIntent
 import android.app.Service
 import android.content.Context
 import android.content.Intent
@@ -38,6 +39,17 @@ class AlarmServices: Service() {
             calendar.add(Calendar.DATE, 1)
         }
 
-//        val intent = Intent(this)
+        val intent = Intent(this, AlarmDailyReceiver::class.java)
+        val pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0)
+        if (dailyAlarmOn) {
+            mAlarm.setRepeating(
+                AlarmManager.RTC_WAKEUP,
+                calendar.timeInMillis,
+                AlarmManager.INTERVAL_DAY,
+                pendingIntent
+            )
+        } else {
+            mAlarm.cancel(pendingIntent)
+        }
     }
 }

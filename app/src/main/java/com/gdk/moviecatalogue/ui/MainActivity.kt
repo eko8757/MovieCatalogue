@@ -1,6 +1,7 @@
 package com.gdk.moviecatalogue.ui
 
 import android.content.Intent
+import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -29,7 +30,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationViewListener {
 
         main_bottom_navigation.setOnNavigationItemSelectedListener {
             val id = it.itemId
-            when(id) {
+            when (id) {
                 R.id.action_movie -> fragment = MovieFragment()
                 R.id.action_tv -> fragment = TvFragment()
                 R.id.action_favorites -> fragment = FavoriteFragment()
@@ -39,6 +40,15 @@ class MainActivity : AppCompatActivity(), BottomNavigationViewListener {
             transaction.replace(R.id.main_frame, fragment)
             transaction.commit()
             true
+        }
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+
+        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
+
         }
     }
 
