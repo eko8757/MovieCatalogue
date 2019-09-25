@@ -12,7 +12,6 @@ interface DetailView {
             title : String,
             releaseDate : String,
             rating : String,
-            popularity : String,
             description : String
         )
         fun checkFavorite()
@@ -45,7 +44,6 @@ interface DetailView {
             title : String,
             firstAir : String,
             rating : String,
-            popularity : String,
             description : String
         )
         fun checkFavorite()

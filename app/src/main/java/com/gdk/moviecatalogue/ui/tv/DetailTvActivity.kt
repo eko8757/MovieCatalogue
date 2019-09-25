@@ -39,7 +39,6 @@ class DetailTvActivity : AppCompatActivity(), DetailView.ViewTVShow {
         title: String,
         firstAir: String,
         rating: String,
-        popularity: String,
         description: String
     ) {
         tv_title_detail.text = title

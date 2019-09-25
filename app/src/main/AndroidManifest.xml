@@ -4,6 +4,9 @@
     package="com.gdk.moviecatalogue">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <permission android:name="com.gdk.moviecatalogue.READ_DATABASE" android:protectionLevel="normal"/>
 
     <application
         android:name=".util.Prefrences"
@@ -23,6 +26,28 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/movie_favorite_widget_info" />
         </receiver>
+        <receiver android:name=".alarm.AlarmDailyReceiver"/>
+        <receiver android:name=".alarm.AlarmReleaseReceiver"/>
+        <receiver
+            android:name=".alarm.MainReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+
+                <category android:name="android.intent.category.HOME" />
+            </intent-filter>
+        </receiver>
+        
+        <provider
+            android:authorities="com.gdk.moviecatalogue"
+            android:name=".provider.ServiceProvider"
+            android:exported="true"
+            android:readPermission="com.gdk.moviecatalogue.READ_DATABASE"/>
+
+        <service
+            android:name=".widget.StackWidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
 
         <activity android:name=".ui.MainActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"/>

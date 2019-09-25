@@ -1,3 +1,14 @@
 <resources>
-    <string name="app_name">MovieProvider</string>
+    <string name="app_name">Movie Provider</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_movie_pager" translatable="false">Movie</string>
+    <string name="title_tv_pager" translatable="false">Tv Show</string>
+
+    <string name="release_date" translatable="false">Release Date:</string>
+    <string name="vote_aveage" translatable="false">Vote Average:</string>
+    <string name="overview" translatable="false">Overview:</string>
+
+
 </resources>

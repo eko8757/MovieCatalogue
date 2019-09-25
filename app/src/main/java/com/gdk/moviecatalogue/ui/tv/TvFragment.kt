@@ -58,6 +58,13 @@ class TvFragment : Fragment(), MainView.TvShowView, TvAdapter.OnItemClickListene
         }
     }
 
+    override fun showData(data: ArrayList<ResponseTv.ResultTvShow>) {
+        mAdapter = TvAdapter(data)
+        view?.rv_tv_show?.adapter = mAdapter
+        mAdapter.setOnItemClickListener(this)
+        this.dataGlobal = data
+    }
+
     private fun searchView(view: View) {
         view.search_tv?.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -94,7 +101,9 @@ class TvFragment : Fragment(), MainView.TvShowView, TvAdapter.OnItemClickListene
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putParcelableArrayList(KEY_TV, dataGlobal)
+        if (::dataGlobal.isInitialized) {
+            outState.putParcelableArrayList(KEY_TV, dataGlobal)
+        }
     }
 
     override fun onItemClickListener(position: Int) {
@@ -114,12 +123,5 @@ class TvFragment : Fragment(), MainView.TvShowView, TvAdapter.OnItemClickListene
 
     override fun hideProgress() {
         progress.dismiss()
-    }
-
-    override fun showData(data: ArrayList<ResponseTv.ResultTvShow>) {
-        mAdapter = TvAdapter(data)
-        view?.rv_tv_show?.adapter = mAdapter
-        mAdapter.setOnItemClickListener(this)
-        this.dataGlobal = data
     }
 }

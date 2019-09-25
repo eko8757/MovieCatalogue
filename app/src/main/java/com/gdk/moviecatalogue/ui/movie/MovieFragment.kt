@@ -96,7 +96,7 @@ class MovieFragment : Fragment(), MainView.MovieView, MovieAdapter.OnItemClickLi
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        if (outState != null) {
+        if (::dataGlobal.isInitialized) {
             outState.putParcelableArrayList(KEY_MOVIE, dataGlobal)
         }
     }

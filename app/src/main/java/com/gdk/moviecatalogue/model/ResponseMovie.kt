@@ -1,11 +1,26 @@
 package com.gdk.moviecatalogue.model
 
+import android.content.ContentValues
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
+
+
+class StringResponseMovie {
+    companion object {
+        const val id = "id"
+        const val title = "title"
+        const val poster_path = "poster_path"
+        const val overview = "overview"
+        const val release_date = "release_date"
+        const val vote_average = "vote_average"
+
+    }
+}
+
 
 class ResponseMovie {
     @SerializedName("page")
@@ -67,5 +82,16 @@ class ResponseMovie {
 
         @SerializedName("release_date")
         var release_date: String? = null
-    ) : Parcelable
+    ) : Parcelable {
+        fun values() : ContentValues {
+            val contentValues = ContentValues()
+            contentValues.put(StringResponseMovie.id, id)
+            contentValues.put(StringResponseMovie.title, title)
+            contentValues.put(StringResponseMovie.poster_path, poster_path)
+            contentValues.put(StringResponseMovie.overview, overview)
+            contentValues.put(StringResponseMovie.release_date, release_date)
+            contentValues.put(StringResponseMovie.vote_average, vote_average)
+            return contentValues
+        }
+    }
 }

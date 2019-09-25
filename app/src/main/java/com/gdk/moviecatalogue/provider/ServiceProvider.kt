@@ -52,12 +52,16 @@ class ServiceProvider: ContentProvider() {
 
     override fun onCreate(): Boolean = true
 
-    override fun update(uri: Uri, values: ContentValues?, selection: String?, selectionArgs: Array<String>?): Int = 0
+    override fun update(uri: Uri, values: ContentValues?, selection: String?, selectionArgs: Array<String>?): Int {
+        return 0
+    }
 
     override fun delete(uri: Uri, selection: String?, selectionArgs: Array<String>?): Int {
         Objects.requireNonNull(context).contentResolver.notifyChange(uri, null)
         return 0
     }
 
-    override fun getType(uri: Uri): String? = null
+    override fun getType(uri: Uri): String? {
+        return null
+    }
 }

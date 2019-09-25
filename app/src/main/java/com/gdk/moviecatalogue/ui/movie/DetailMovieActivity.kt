@@ -62,7 +62,6 @@ class DetailMovieActivity : AppCompatActivity(), DetailView.ViewMovie {
         title: String,
         releaseDate: String,
         rating: String,
-        popularity: String,
         description: String
     ) {
         tv_title_detail.text = title
