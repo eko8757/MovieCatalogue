@@ -22,6 +22,7 @@ abstract class DbHelper : RoomDatabase() {
         fun getinstance(ctx: Context): DbHelper {
             if (instance == null) {
                 instance = Room.databaseBuilder(ctx.applicationContext, DbHelper::class.java, "favorite")
+                    .fallbackToDestructiveMigration()
                     .allowMainThreadQueries()
                     .build()
             }

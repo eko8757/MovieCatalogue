@@ -20,10 +20,11 @@ class AlarmDailyReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
         context.let {
             val notificationBuilder = it?.let { it1 -> NotificationCompat.Builder(it1, StaticString.CHANNEL_ID) }
-            val intent = Intent(it, MainActivity::class.java)
-            val pendingIntent = PendingIntent.getActivity(it, 0, intent, FLAG_UPDATE_CURRENT)
+            val i = Intent(it, MainActivity::class.java)
+            val pendingIntent = PendingIntent.getActivity(it, 0, i, FLAG_UPDATE_CURRENT)
 
-            notificationBuilder?.setAutoCancel(true)?.setContentIntent(pendingIntent)
+            notificationBuilder?.setAutoCancel(true)
+                ?.setContentIntent(pendingIntent)
                 ?.setDefaults(Notification.DEFAULT_ALL)
                 ?.setWhen(System.currentTimeMillis())
                 ?.setSmallIcon(R.drawable.ic_movie_black_24dp)

@@ -19,6 +19,6 @@ class DetailMoviePresenter(val view: DetailView.ViewMovie) : DetailView.Presente
         view.showData(img, title, release, rating, desc)
 
         this.dataGlobal = data
-        this.idMovie = data.id
+        this.idMovie = data.id!!
     }
 }

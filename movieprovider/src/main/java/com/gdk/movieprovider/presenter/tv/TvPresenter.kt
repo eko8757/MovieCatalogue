@@ -1,33 +1,61 @@
 package com.gdk.movieprovider.presenter.tv
 
+import android.content.ContentProviderClient
 import android.content.Context
 import android.content.Intent
 import android.database.Cursor
+import android.net.Uri
+import android.os.RemoteException
 import com.gdk.movieprovider.model.ResponseTv
+import com.gdk.movieprovider.model.StringResponseTvShow
 import com.gdk.movieprovider.ui.tv.DetailTv
+import com.gdk.movieprovider.utils.StaticString
 import com.gdk.movieprovider.view.MainView
 
 class TvPresenter(val view: MainView.TvShowView) : MainView.TvShowPresenter {
 
     private var resultTv: ArrayList<ResponseTv.ResultTvShow>? = null
+    private val TV_TABLE = ResponseTv.ResultTvShow::class.java.simpleName as String
+    private val CONTENT_URI = Uri.parse(StaticString.SCHEME + "://" + StaticString.AUTHOR + "/" + TV_TABLE)
 
     override fun getTvShow(context: Context) {
-        val items = ArrayList<ResponseTv.ResultTvShow>()
-        val item = ResponseTv.ResultTvShow()
 
-        item.id = 1
-        item.overview =
-            "After a particle accelerator causes a freak storm, CSI Investigator Barry Allen is struck by lightning and falls into a coma. Months later he awakens with the power of super speed, granting him the ability to move through Central City like an unseen guardian angel. Though initially excited by his newfound powers, Barry is shocked to discover he is not the only \\\"meta-human\\\" who was created in the wake of the accelerator explosion -- and not everyone is using their new powers for good. Barry partners with S.T.A.R. Labs and dedicates his life to protect the innocent. For now, only a few close friends and associates know that Barry is literally the fastest man alive, but it won't be long before the world learns what Barry Allen has become...The Flash."
-        item.poster_path = "/is7DUNsw59EcTwCO1FgECbNIfu0.jpg"
-        item.first_air = "2019-09-06"
-        item.title = "Desmontando la Historia"
-        item.vote = 40.0
+        val client: ContentProviderClient = context.contentResolver.acquireContentProviderClient(CONTENT_URI)
+        try {
+            assert(client != null) {
+                val cursor = client.query(
+                    CONTENT_URI, arrayOf(
+                        StringResponseTvShow.id,
+                        StringResponseTvShow.original_name,
+                        StringResponseTvShow.poster_path,
+                        StringResponseTvShow.overview,
+                        StringResponseTvShow.first_air_date,
+                        StringResponseTvShow.vote_average
+                    ), null, null, null, null
+                )
 
-        items.add(item)
-        items.add(item)
-        items.add(item)
-        items.add(item)
-        items.add(item)
+                assert(cursor != null)
+                if (cursor.count > 0) {
+                    view.showData(convertCursor(cursor))
+                } else {
+                    view.empty()
+                    cursor.close()
+                }
+            }
+        } catch (e: RemoteException) {
+            e.printStackTrace()
+        }
+
+    }
+
+    override fun convertCursor(cursor: Cursor): ArrayList<ResponseTv.ResultTvShow> {
+        val items: ArrayList<ResponseTv.ResultTvShow> = ArrayList()
+        while (cursor.moveToNext()) {
+            val item = ResponseTv.ResultTvShow(cursor)
+            items.add(item)
+        }
+        resultTv = items
+        return items
     }
 
     override fun toDetail(context: Context, position: Int) {
@@ -36,7 +64,5 @@ class TvPresenter(val view: MainView.TvShowView) : MainView.TvShowPresenter {
         context.startActivity(intent)
     }
 
-    override fun convertCursor(cursor: Cursor): ArrayList<ResponseTv.ResultTvShow> {
-        return ArrayList()
-    }
+
 }

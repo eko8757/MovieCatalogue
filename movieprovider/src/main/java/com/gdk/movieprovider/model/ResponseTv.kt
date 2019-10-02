@@ -4,18 +4,19 @@ import android.database.Cursor
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.gdk.movieprovider.model.StringResponseMovie.Companion.title
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
-class StringResponseTvShow {
-    companion object {
+class StringResponseTvShow{
+    companion object{
         const val id = "id"
-        const val title = "original_name"
+        const val original_name = "original_name"
         const val poster_path = "poster_path"
         const val overview = "overview"
-        const val first_air = "first_air_date"
-        const val vote = "vote_average"
+        const val first_air_date = "first_air_date"
+        const val vote_average = "vote_average"
     }
 }
 
@@ -42,35 +43,36 @@ class ResponseTv {
         @PrimaryKey
         @SerializedName("id")
         @Expose
-        var id: Long = 0,
+        var id: Long? = 0,
 
         @SerializedName("original_name")
         @Expose
-        var title: String = "",
+        var original_name: String? = null,
 
         @SerializedName("poster_path")
         @Expose
-        var poster_path: String = "",
+        var poster_path: String? = null,
 
         @SerializedName("overview")
         @Expose
-        var overview: String = "",
+        var overview: String? = null,
 
         @SerializedName("first_air_date")
         @Expose
-        var first_air: String = "",
+        var first_air_date: String? = null,
 
         @SerializedName("vote_average")
         @Expose
-        var vote: Double = 0.0
+        var vote_average: Double? = 0.0
+
     ) : Parcelable {
         constructor(cursor: Cursor) : this() {
             id = cursor.getLong(cursor.getColumnIndex(StringResponseTvShow.id))
-            title = cursor.getString(cursor.getColumnIndex(StringResponseTvShow.title))
+            original_name = cursor.getString(cursor.getColumnIndex(StringResponseTvShow.original_name))
             poster_path = cursor.getString(cursor.getColumnIndex(StringResponseTvShow.poster_path))
             overview = cursor.getString(cursor.getColumnIndex(StringResponseTvShow.overview))
-            first_air = cursor.getString(cursor.getColumnIndex(StringResponseTvShow.first_air))
-            vote = cursor.getDouble(cursor.getColumnIndex(StringResponseTvShow.vote))
+            first_air_date = cursor.getString(cursor.getColumnIndex(StringResponseTvShow.first_air_date))
+            vote_average = cursor.getDouble(cursor.getColumnIndex(StringResponseTvShow.vote_average))
         }
     }
 }

@@ -37,20 +37,22 @@ class ServiceProvider: ContentProvider() {
         selectionArgs: Array<String>?,
         sortOrder: String?
     ): Cursor? {
-       return when (uMatcher.match(uri)) {
+       when (uMatcher.match(uri)) {
            MOVIE -> {
                val movieDao = DbHelper.getinstance(context).movieDao()
-               movieDao.getAllMovieCursor()
+               return movieDao.getAllMovieCursor()
            }
            TV_SHOW -> {
                val tvDao = DbHelper.getinstance(context).tvDao()
-               tvDao.getAllTvCursor()
+               return tvDao.getAllTvCursor()
            }
-           else -> null
+           else -> return null
        }
     }
 
-    override fun onCreate(): Boolean = true
+    override fun onCreate(): Boolean {
+        return true
+    }
 
     override fun update(uri: Uri, values: ContentValues?, selection: String?, selectionArgs: Array<String>?): Int {
         return 0

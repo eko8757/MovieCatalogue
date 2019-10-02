@@ -20,7 +20,7 @@ class DetailPresenterTv(val view: DetailView.ViewTVShow): DetailView.PresenterTV
 
     override fun extractData(context: Context, data: ResponseTv.ResultTvShow) {
         val image = data.poster_path.toString()
-        val title = data.title.toString()
+        val title = data.original_name.toString()
         val firstAir = data.first_air_date.toString()
         val rating = data.vote_average.toString()
         val description = data.overview.toString()

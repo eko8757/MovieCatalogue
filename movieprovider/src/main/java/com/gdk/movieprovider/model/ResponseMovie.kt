@@ -9,12 +9,13 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 class StringResponseMovie {
-    companion object {
+    companion object{
         const val id = "id"
         const val title = "title"
         const val poster_path = "poster_path"
         const val overview = "overview"
         const val release_date = "release_date"
+        const val popularity = "popularity"
         const val vote_average = "vote_average"
     }
 }
@@ -38,31 +39,31 @@ class ResponseMovie {
 
     @Entity(tableName = "db_movie")
     @Parcelize
-    data class ResultMovie(
+    data class ResultMovie (
         @PrimaryKey
         @SerializedName(StringResponseMovie.id)
         @Expose
-        var id: Long = 0,
+        var id: Long? = 0,
 
         @SerializedName(StringResponseMovie.title)
         @Expose
-        var title: String = "",
+        var title: String? = null,
 
         @SerializedName(StringResponseMovie.poster_path)
         @Expose
-        var poster_path: String = "",
+        var poster_path: String? = null,
 
         @SerializedName(StringResponseMovie.overview)
         @Expose
-        var overview: String = "",
+        var overview: String? = null,
 
         @SerializedName(StringResponseMovie.release_date)
         @Expose
-        var release_date: String = "",
+        var release_date: String? = null,
 
         @SerializedName(StringResponseMovie.vote_average)
         @Expose
-        var vote_average: Double = 0.0
+        var vote_average: Double? = 0.0
 
     ) : Parcelable {
         constructor(cursor: Cursor) : this() {

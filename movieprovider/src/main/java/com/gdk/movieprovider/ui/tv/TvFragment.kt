@@ -21,6 +21,7 @@ import com.gdk.movieprovider.view.MainView
 import kotlinx.android.synthetic.main.fragment_tv.*
 import kotlinx.android.synthetic.main.fragment_tv.view.*
 import org.jetbrains.anko.support.v4.progressDialog
+import org.jetbrains.anko.support.v4.toast
 
 class TvFragment : Fragment(), MainView.TvShowView, TvAdapter.OnItemClickListener {
 
@@ -28,7 +29,7 @@ class TvFragment : Fragment(), MainView.TvShowView, TvAdapter.OnItemClickListene
     private lateinit var mPresenter: TvPresenter
     private lateinit var dataGlobal: ArrayList<ResponseTv.ResultTvShow>
     private lateinit var progressDialog: ProgressDialog
-    private val KEYTVSHOW = "DataTvShow"
+    private val TV_KEY = "DataTv"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,7 +45,7 @@ class TvFragment : Fragment(), MainView.TvShowView, TvAdapter.OnItemClickListene
         view.rv_tv_provider.layoutManager = LinearLayoutManager(context, LinearLayout.VERTICAL, false)
 
         if (savedInstanceState != null) {
-            showData(savedInstanceState.getParcelableArrayList(KEYTVSHOW))
+            showData(savedInstanceState.getParcelableArrayList(TV_KEY))
         } else {
             mPresenter = TvPresenter(this)
             getData()
@@ -54,7 +55,7 @@ class TvFragment : Fragment(), MainView.TvShowView, TvAdapter.OnItemClickListene
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         if (::dataGlobal.isInitialized) {
-            outState.putParcelableArrayList(KEYTVSHOW, dataGlobal)
+            outState.putParcelableArrayList(TV_KEY, dataGlobal)
         }
     }
 

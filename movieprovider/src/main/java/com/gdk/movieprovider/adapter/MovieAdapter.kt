@@ -27,7 +27,6 @@ class MovieAdapter(val items: List<ResponseMovie.ResultMovie>) : RecyclerView.Ad
 
     override fun getItemCount(): Int = items.size
 
-
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         holder.bindData(items[position], itemClickListener)
     }
@@ -35,8 +34,8 @@ class MovieAdapter(val items: List<ResponseMovie.ResultMovie>) : RecyclerView.Ad
     class MovieViewHolder(view: View): RecyclerView.ViewHolder(view) {
 
         fun bindData(item: ResponseMovie.ResultMovie, itemClickListener: OnItemClickListener) {
-            itemView.tv_title.text = item.title.toString()
-            itemView.tv_desc.text = item.overview.toString()
+            itemView.tv_title.text = item.title
+            itemView.tv_desc.text = item.overview
             Picasso.get().load(BuildConfig.MOVIE_PATH + item.poster_path).into(itemView.img_card)
 
             itemView.setOnClickListener {

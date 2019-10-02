@@ -11,15 +11,10 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var fragmentManager: FragmentManager
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         moveFragment(MainFragment())
-
-//        fragmentManager = supportFragmentManager
-//        fragmentManager.beginTransaction().replace(R.id.main_frame, MovieFragment()).commit()
     }
 
     private fun moveFragment(fragment: Fragment) {

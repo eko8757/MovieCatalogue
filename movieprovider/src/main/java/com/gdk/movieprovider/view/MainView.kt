@@ -10,6 +10,7 @@ interface MainView {
         fun showData(data: ArrayList<ResponseMovie.ResultMovie>)
         fun getData()
         fun empty()
+        fun makeToast(msg: String)
         fun showProgress()
         fun hideProgress()
     }

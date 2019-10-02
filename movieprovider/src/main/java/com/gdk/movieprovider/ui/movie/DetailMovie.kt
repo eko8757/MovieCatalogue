@@ -13,8 +13,6 @@ import kotlinx.android.synthetic.main.activity_detail_movie.*
 class DetailMovie : AppCompatActivity(), DetailView.ViewMovie {
 
     private lateinit var mPresenter: DetailView.PresenterMovie
-    private var menuItem: Menu? = null
-    private var isFavorite: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

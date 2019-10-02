@@ -16,39 +16,9 @@
         android:roundIcon="@mipmap/ic_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:ignore="GoogleAppIndexingWarning">
-        <receiver android:name=".widget.MovieFavoriteWidget">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
+        tools:ignore="AllowBackup,GoogleAppIndexingWarning">
 
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/movie_favorite_widget_info" />
-        </receiver>
-        <receiver android:name=".alarm.AlarmDailyReceiver"/>
-        <receiver android:name=".alarm.AlarmReleaseReceiver"/>
-        <receiver
-            android:name=".alarm.MainReceiver"
-            android:enabled="true"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-
-                <category android:name="android.intent.category.HOME" />
-            </intent-filter>
-        </receiver>
-        
-        <provider
-            android:authorities="com.gdk.moviecatalogue"
-            android:name=".provider.ServiceProvider"
-            android:exported="true"
-            android:readPermission="com.gdk.moviecatalogue.READ_DATABASE"/>
-
-        <service
-            android:name=".widget.StackWidgetService"
-            android:permission="android.permission.BIND_REMOTEVIEWS" />
-
+        <!--activity-->
         <activity android:name=".ui.MainActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"/>
         <activity
@@ -68,10 +38,45 @@
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!--widget-->
+        <receiver android:name=".widget.MovieFavoriteWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/movie_favorite_widget_info" />
+        </receiver>
+
+        <service
+            android:name=".widget.StackWidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+
+        <!--alarm-->
+        <receiver
+            android:name=".alarm.MainReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <category android:name="android.intent.category.HOME" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".alarm.AlarmDailyReceiver"/>
+        <receiver android:name=".alarm.AlarmReleaseReceiver"/>
+
+        <!--content provider-->
+        <provider
+            android:authorities="com.gdk.moviecatalogue"
+            android:name=".provider.ServiceProvider"
+            android:exported="true"
+            android:enabled="true"
+            android:readPermission="com.gdk.moviecatalogue.READ_DATABASE"/>
     </application>
 
 </manifest>

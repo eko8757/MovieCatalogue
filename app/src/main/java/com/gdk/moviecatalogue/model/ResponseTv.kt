@@ -2,6 +2,7 @@ package com.gdk.moviecatalogue.model
 
 import android.content.ContentValues
 import android.os.Parcelable
+import androidx.annotation.StringRes
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.gdk.moviecatalogue.model.StringResponseTvShow.Companion.first_air
@@ -42,38 +43,23 @@ class ResponseTv {
     @Parcelize
     data class ResultTvShow(
 
-        @SerializedName("original_name")
-        var original_name: String? = null,
-
-        @SerializedName("name")
-        var title: String? = null,
-
-        @SerializedName("popularity")
-        var popularity: Double? = 0.0,
-
-        @SerializedName("vote_count")
-        var vote_count: Long? = 0,
-
-        @SerializedName("first_air_date")
-        var first_air_date: String? = null,
-
-        @SerializedName("backdrop_path")
-        var backdrop_path: String? = null,
-
-        @SerializedName("original_languange")
-        var original_languange: String? = null,
-
         @PrimaryKey
-        @SerializedName("id")
+        @SerializedName(StringResponseTvShow.id)
         var id: Long? = 0,
 
-        @SerializedName("vote_average")
+        @SerializedName(StringResponseTvShow.original_name)
+        var original_name: String? = null,
+
+        @SerializedName(StringResponseTvShow.first_air)
+        var first_air_date: String? = null,
+
+        @SerializedName(StringResponseTvShow.vote_average)
         var vote_average: Double? = 0.0,
 
-        @SerializedName("overview")
+        @SerializedName(StringResponseTvShow.overview)
         var overview: String? = null,
 
-        @SerializedName("poster_path")
+        @SerializedName(StringResponseTvShow.poster_path)
         var poster_path: String? = null
     ) : Parcelable {
         fun values(): ContentValues {

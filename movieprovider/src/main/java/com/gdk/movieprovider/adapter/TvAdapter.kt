@@ -35,8 +35,8 @@ class TvAdapter(val items: List<ResponseTv.ResultTvShow>) : RecyclerView.Adapter
     class TvViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         fun bindData(item: ResponseTv.ResultTvShow, itemClickListener: OnItemClickListener) {
-            itemView.tv_title.text = item.title.toString()
-            itemView.tv_desc.text = item.overview.toString()
+            itemView.tv_title.text = item.original_name
+            itemView.tv_desc.text = item.overview
             Picasso.get().load(BuildConfig.MOVIE_PATH + item.poster_path).into(itemView.img_card)
 
             itemView.setOnClickListener {

@@ -15,13 +15,14 @@ import com.gdk.movieprovider.model.ResponseMovie
 import com.gdk.movieprovider.presenter.movie.MoviePresenter
 import com.gdk.movieprovider.view.MainView
 import kotlinx.android.synthetic.main.fragment_movie.view.*
+import org.jetbrains.anko.support.v4.toast
 
 class MovieFragment : Fragment(), MainView.MovieView, MovieAdapter.OnItemClickListener {
 
     private lateinit var adapter: MovieAdapter
     private lateinit var mPresenter: MoviePresenter
     private lateinit var dataGlobal: ArrayList<ResponseMovie.ResultMovie>
-    private val MOVIE_KEY = "moviekey"
+    private val MOVIE_KEY = "DataMovie"
     private lateinit var progressDialog: ProgressDialog
 
     override fun onCreateView(
@@ -35,9 +36,9 @@ class MovieFragment : Fragment(), MainView.MovieView, MovieAdapter.OnItemClickLi
     @SuppressLint("WrongConstant")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        view.rv_movie_provider.layoutManager = LinearLayoutManager(context, LinearLayout.VERTICAL, false)
+        view.rv_movie_provider.layoutManager = LinearLayoutManager(activity)
 
-        if (savedInstanceState != null && savedInstanceState.containsKey(MOVIE_KEY)) {
+        if (savedInstanceState != null) {
             showData(savedInstanceState.getParcelableArrayList(MOVIE_KEY))
         } else {
             mPresenter = MoviePresenter(this)
@@ -86,4 +87,7 @@ class MovieFragment : Fragment(), MainView.MovieView, MovieAdapter.OnItemClickLi
         fun movieFavoriteInstance(): MovieFragment= MovieFragment()
     }
 
+    override fun makeToast(msg: String) {
+        toast(msg)
+    }
 }

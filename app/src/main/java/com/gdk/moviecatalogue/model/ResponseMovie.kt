@@ -10,17 +10,15 @@ import kotlinx.android.parcel.Parcelize
 
 
 class StringResponseMovie {
-    companion object {
+    companion object{
         const val id = "id"
         const val title = "title"
         const val poster_path = "poster_path"
         const val overview = "overview"
         const val release_date = "release_date"
         const val vote_average = "vote_average"
-
     }
 }
-
 
 class ResponseMovie {
     @SerializedName("page")
@@ -29,11 +27,11 @@ class ResponseMovie {
 
     @SerializedName("total_results")
     @Expose
-    var total_result: Long? = 0
+    var total_results: Long? = 0
 
-    @SerializedName("total_page")
+    @SerializedName("total_pages")
     @Expose
-    var total_page: Long? = 0
+    var total_pages: Long? = 0
 
     @SerializedName("results")
     @Expose
@@ -41,47 +39,31 @@ class ResponseMovie {
 
     @Entity(tableName = "db_movie")
     @Parcelize
-    data class ResultMovie(
-
-        @SerializedName("vote_count")
-        var vote_count: Long? = 0,
-
+    data class ResultMovie (
         @PrimaryKey
-        @SerializedName("id")
+        @SerializedName(StringResponseMovie.id)
+        @Expose
         var id: Long? = 0,
 
-        @SerializedName("video")
-        var video: Boolean? = false,
-
-        @SerializedName("vote_average")
-        var vote_average: Double? = 0.0,
-
-        @SerializedName("title")
+        @SerializedName(StringResponseMovie.title)
+        @Expose
         var title: String? = null,
 
-        @SerializedName("popularity")
-        var popularity: Double? = 0.0,
-
-        @SerializedName("poster_path")
+        @SerializedName(StringResponseMovie.poster_path)
+        @Expose
         var poster_path: String? = null,
 
-        @SerializedName("original_languange")
-        var original_languange: String? = null,
-
-        @SerializedName("original_title")
-        var original_title: String? = null,
-
-        @SerializedName("backdrop_path")
-        var backdrop_path: String? = null,
-
-        @SerializedName("adult")
-        var adult: Boolean? = false,
-
-        @SerializedName("overview")
+        @SerializedName(StringResponseMovie.overview)
+        @Expose
         var overview: String? = null,
 
-        @SerializedName("release_date")
-        var release_date: String? = null
+        @SerializedName(StringResponseMovie.release_date)
+        @Expose
+        var release_date: String? = null,
+
+        @SerializedName(StringResponseMovie.vote_average)
+        @Expose
+        var vote_average: Double? = 0.0
     ) : Parcelable {
         fun values() : ContentValues {
             val contentValues = ContentValues()

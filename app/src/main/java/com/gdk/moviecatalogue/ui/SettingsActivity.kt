@@ -31,6 +31,8 @@ class SettingsActivity : AppCompatActivity(), SettingsView.ViewSetting, View.OnC
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
+
+        progressDialog = ProgressDialog(this)
         mPresenter = SettingsPresenter(this)
         isDailyAlarm = Prefs.getBoolean(StaticString.DAILY_ALARM_ON, false)
         isReleaseAlarm = Prefs.getBoolean(StaticString.TODAY_MOVIE_ALARM_ON, false)
@@ -101,7 +103,6 @@ class SettingsActivity : AppCompatActivity(), SettingsView.ViewSetting, View.OnC
     }
 
     override fun showProgress() {
-        progressDialog = ProgressDialog(this)
         progressDialog.setMessage(getString(R.string.loading_message))
         progressDialog.setCanceledOnTouchOutside(false)
         progressDialog.show()
