@@ -22,7 +22,7 @@ class FavoriteMovieFragment : Fragment(), MainView.MovieView, MovieAdapter.OnIte
     private lateinit var mPresenter: FavoriteMoviePresenter
     private lateinit var adapter: MovieAdapter
     private lateinit var dataGlobal: ArrayList<ResponseMovie.ResultMovie>
-    private val KEYMOVIE = "DataMovieFavorite"
+    private val MOVIE_KEY = "DataMovieFavorite"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,10 +34,10 @@ class FavoriteMovieFragment : Fragment(), MainView.MovieView, MovieAdapter.OnIte
     @SuppressLint("WrongConstant")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        view.rv_favorite_movie.layoutManager = LinearLayoutManager(context, LinearLayout.VERTICAL, false)
+        view.rv_favorite_movie.layoutManager = LinearLayoutManager(activity)
 
         if (savedInstanceState != null) {
-            showData(savedInstanceState.getParcelableArrayList(KEYMOVIE))
+            showData(savedInstanceState.getParcelableArrayList(MOVIE_KEY))
         } else {
             mPresenter = FavoriteMoviePresenter(this, context)
             getData()
@@ -47,7 +47,7 @@ class FavoriteMovieFragment : Fragment(), MainView.MovieView, MovieAdapter.OnIte
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         if (::dataGlobal.isInitialized) {
-            outState.putParcelableArrayList(KEYMOVIE, dataGlobal)
+            outState.putParcelableArrayList(MOVIE_KEY, dataGlobal)
         }
     }
 

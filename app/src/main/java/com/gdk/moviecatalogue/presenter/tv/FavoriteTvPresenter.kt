@@ -13,7 +13,7 @@ class FavoriteTvPresenter(val view: MainView.TvShowView, val context: Context?) 
 
     override fun getFavoriteTvShow(context: Context) {
         view.showProgress()
-        val getData = DbHelper.getinstance(context).tvDao().getAllDataTv()
+        val getData = DbHelper.getInstance(context).tvDao().getAllDataTv()
         if (getData != null && getData.isNotEmpty()) {
             view.showData(getData as ArrayList<ResponseTv.ResultTvShow>)
             this.data = getData

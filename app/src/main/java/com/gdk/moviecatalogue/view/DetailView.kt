@@ -21,20 +21,10 @@ interface DetailView {
     }
 
     interface PresenterMovie {
-        fun extractData(
-            context: Context,
-            data: ResponseMovie.ResultMovie
-        )
-
-        fun setFavorite(
-            context: Context
-        )
-        fun unsetFavorite(
-            context: Context
-        )
-        fun getFavorite(
-            context: Context
-        ) : Boolean
+        fun extractData(context: Context, data: ResponseMovie.ResultMovie)
+        fun setFavorite(context: Context)
+        fun unsetFavorite(context: Context)
+        fun getFavorite(context: Context) : Boolean
     }
 
     interface ViewTVShow {
@@ -53,19 +43,9 @@ interface DetailView {
     }
 
     interface PresenterTVShow {
-        fun extractData(
-            context: Context,
-            data: ResponseTv.ResultTvShow
-        )
-
-        fun setFavorite(
-            context: Context
-        )
-        fun unsetFavorite(
-            context: Context
-        )
-        fun getFavorite(
-            context: Context
-        ) : Boolean
+        fun extractData(context: Context, data: ResponseTv.ResultTvShow)
+        fun setFavorite(context: Context)
+        fun unsetFavorite(context: Context)
+        fun getFavorite(context: Context) : Boolean
     }
 }

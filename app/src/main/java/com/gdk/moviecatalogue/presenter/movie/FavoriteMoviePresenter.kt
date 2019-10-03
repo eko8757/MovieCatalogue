@@ -13,7 +13,7 @@ class FavoriteMoviePresenter(val view: MainView.MovieView, val context: Context?
 
     override fun getFavoriteMovie(context: Context) {
         view.showProgress()
-        val getData = DbHelper.getinstance(context).movieDao().getAllDataMovie()
+        val getData = DbHelper.getInstance(context).movieDao().getAllDataMovie()
         if (getData != null && getData.isNotEmpty()) {
             view.showData(getData as ArrayList<ResponseMovie.ResultMovie>)
             this.data = getData

@@ -30,15 +30,15 @@ class DetailPresenterTv(val view: DetailView.ViewTVShow): DetailView.PresenterTV
     }
 
     override fun setFavorite(context: Context) {
-        DbHelper.getinstance(context).tvDao().insertTvshow(dataGlobal)
+        DbHelper.getInstance(context).tvDao().insertTvshow(dataGlobal)
         context.contentResolver.insert(CONTENT_URI, dataGlobal.values())
     }
 
     override fun unsetFavorite(context: Context) {
-        DbHelper.getinstance(context).tvDao().removeData(idTvShow)
+        DbHelper.getInstance(context).tvDao().removeData(idTvShow)
     }
 
     override fun getFavorite(context: Context): Boolean {
-        return DbHelper.getinstance(context).tvDao().getSelectDataTv(idTvShow) != null
+        return DbHelper.getInstance(context).tvDao().getSelectDataTv(idTvShow) != null
     }
 }

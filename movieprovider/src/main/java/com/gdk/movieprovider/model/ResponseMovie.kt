@@ -15,7 +15,6 @@ class StringResponseMovie {
         const val poster_path = "poster_path"
         const val overview = "overview"
         const val release_date = "release_date"
-        const val popularity = "popularity"
         const val vote_average = "vote_average"
     }
 }

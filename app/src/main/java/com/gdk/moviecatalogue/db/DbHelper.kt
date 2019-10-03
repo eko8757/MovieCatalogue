@@ -19,7 +19,7 @@ abstract class DbHelper : RoomDatabase() {
         private var instance: DbHelper? = null
 
         @Synchronized
-        fun getinstance(ctx: Context): DbHelper {
+        fun getInstance(ctx: Context): DbHelper {
             if (instance == null) {
                 instance = Room.databaseBuilder(ctx.applicationContext, DbHelper::class.java, "favorite")
                     .fallbackToDestructiveMigration()

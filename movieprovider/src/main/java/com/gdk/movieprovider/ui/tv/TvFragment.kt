@@ -29,7 +29,7 @@ class TvFragment : Fragment(), MainView.TvShowView, TvAdapter.OnItemClickListene
     private lateinit var mPresenter: TvPresenter
     private lateinit var dataGlobal: ArrayList<ResponseTv.ResultTvShow>
     private lateinit var progressDialog: ProgressDialog
-    private val TV_KEY = "DataTv"
+    private val TV_KEY = "DataTvShow"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -63,6 +63,7 @@ class TvFragment : Fragment(), MainView.TvShowView, TvAdapter.OnItemClickListene
         adapter = TvAdapter(data)
         view?.rv_tv_provider?.adapter = adapter
         adapter.setOnItemClickListener(this)
+        adapter.notifyDataSetChanged()
         this.dataGlobal = data
     }
 

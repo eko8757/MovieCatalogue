@@ -9,6 +9,7 @@ class StaticString {
         const val NOTIFICATION_ID = 1
         const val DAILY_ALARM_ON = "dailyalarm"
         const val TODAY_MOVIE_ALARM_ON = "todayalarmaon"
+
         const val SCHEME = "content"
         const val AUTHOR = "com.gdk.moviecatalogue"
 

@@ -22,8 +22,8 @@ class StackRemoteViewFactory(val ctx: Context): RemoteViewsService.RemoteViewsFa
 
     override fun onDataSetChanged() {
         images.clear()
-        val getMovies = DbHelper.getinstance(ctx).movieDao().getAllDataMovie()
-        val getTv = DbHelper.getinstance(ctx).tvDao().getAllDataTv()
+        val getMovies = DbHelper.getInstance(ctx).movieDao().getAllDataMovie()
+        val getTv = DbHelper.getInstance(ctx).tvDao().getAllDataTv()
 
         //movie
         for (data in getMovies) {

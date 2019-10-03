@@ -23,7 +23,7 @@ class FavoriteTvFragment : Fragment(), MainView.TvShowView, TvAdapter.OnItemClic
     private lateinit var mPresenter: FavoriteTvPresenter
     private lateinit var adapter: TvAdapter
     private lateinit var dataGlobal: ArrayList<ResponseTv.ResultTvShow>
-    private val KEYTVSHOW = "DataMovieFavorite"
+    private val TV_KEY = "DataTvShow"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,7 +38,7 @@ class FavoriteTvFragment : Fragment(), MainView.TvShowView, TvAdapter.OnItemClic
         view.rv_favorite_tv.layoutManager = LinearLayoutManager(context, LinearLayout.VERTICAL, false)
 
         if (savedInstanceState != null) {
-            showData(savedInstanceState.getParcelableArrayList(KEYTVSHOW))
+            showData(savedInstanceState.getParcelableArrayList(TV_KEY))
         } else {
             mPresenter = FavoriteTvPresenter(this, context)
             getData()
@@ -48,7 +48,7 @@ class FavoriteTvFragment : Fragment(), MainView.TvShowView, TvAdapter.OnItemClic
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         if (::dataGlobal.isInitialized) {
-            outState.putParcelableArrayList(KEYTVSHOW, dataGlobal)
+            outState.putParcelableArrayList(TV_KEY, dataGlobal)
         }
     }
 

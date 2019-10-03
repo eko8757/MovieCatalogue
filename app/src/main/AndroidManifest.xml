@@ -72,10 +72,9 @@
 
         <!--content provider-->
         <provider
-            android:authorities="com.gdk.moviecatalogue"
             android:name=".provider.ServiceProvider"
+            android:authorities="com.gdk.moviecatalogue"
             android:exported="true"
-            android:enabled="true"
             android:readPermission="com.gdk.moviecatalogue.READ_DATABASE"/>
     </application>
 

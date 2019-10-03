@@ -12,7 +12,7 @@ import com.gdk.moviecatalogue.R
 import com.gdk.moviecatalogue.ui.movie.MovieFragment
 import com.gdk.moviecatalogue.ui.tv.TvFragment
 import com.gdk.moviecatalogue.ui.favorites.FavoriteFragment
-import com.gdk.moviecatalogue.util.BottomNavigationViewListener
+import com.gdk.moviecatalogue.view.BottomNavigationViewListener
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), BottomNavigationViewListener {

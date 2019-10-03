@@ -7,7 +7,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gdk.movieprovider.R
 import com.gdk.movieprovider.adapter.MovieAdapter
@@ -22,7 +21,7 @@ class MovieFragment : Fragment(), MainView.MovieView, MovieAdapter.OnItemClickLi
     private lateinit var adapter: MovieAdapter
     private lateinit var mPresenter: MoviePresenter
     private lateinit var dataGlobal: ArrayList<ResponseMovie.ResultMovie>
-    private val MOVIE_KEY = "DataMovie"
+    private val MOVIE_KEY = "DataMovieFavorite"
     private lateinit var progressDialog: ProgressDialog
 
     override fun onCreateView(
@@ -38,7 +37,7 @@ class MovieFragment : Fragment(), MainView.MovieView, MovieAdapter.OnItemClickLi
         super.onViewCreated(view, savedInstanceState)
         view.rv_movie_provider.layoutManager = LinearLayoutManager(activity)
 
-        if (savedInstanceState != null) {
+        if (savedInstanceState != null && savedInstanceState.containsKey(MOVIE_KEY)) {
             showData(savedInstanceState.getParcelableArrayList(MOVIE_KEY))
         } else {
             mPresenter = MoviePresenter(this)
@@ -57,6 +56,7 @@ class MovieFragment : Fragment(), MainView.MovieView, MovieAdapter.OnItemClickLi
         adapter = MovieAdapter(data)
         view?.rv_movie_provider?.adapter = adapter
         adapter.setOnItemClickListener(this)
+        adapter.notifyDataSetChanged()
         this.dataGlobal = data
     }
 
@@ -84,7 +84,7 @@ class MovieFragment : Fragment(), MainView.MovieView, MovieAdapter.OnItemClickLi
     }
 
     companion object {
-        fun movieFavoriteInstance(): MovieFragment= MovieFragment()
+        fun movieFavoriteInstance(): MovieFragment = MovieFragment()
     }
 
     override fun makeToast(msg: String) {

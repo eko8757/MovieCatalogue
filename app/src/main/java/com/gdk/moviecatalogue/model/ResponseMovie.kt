@@ -64,6 +64,7 @@ class ResponseMovie {
         @SerializedName(StringResponseMovie.vote_average)
         @Expose
         var vote_average: Double? = 0.0
+
     ) : Parcelable {
         fun values() : ContentValues {
             val contentValues = ContentValues()

@@ -10,7 +10,6 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
-
 class StringResponseTvShow{
     companion object{
         const val id = "id"
@@ -45,22 +44,29 @@ class ResponseTv {
 
         @PrimaryKey
         @SerializedName(StringResponseTvShow.id)
+        @Expose
         var id: Long? = 0,
 
         @SerializedName(StringResponseTvShow.original_name)
+        @Expose
         var original_name: String? = null,
 
         @SerializedName(StringResponseTvShow.first_air)
+        @Expose
         var first_air_date: String? = null,
 
         @SerializedName(StringResponseTvShow.vote_average)
+        @Expose
         var vote_average: Double? = 0.0,
 
         @SerializedName(StringResponseTvShow.overview)
+        @Expose
         var overview: String? = null,
 
         @SerializedName(StringResponseTvShow.poster_path)
+        @Expose
         var poster_path: String? = null
+
     ) : Parcelable {
         fun values(): ContentValues {
             val contentValues = ContentValues()

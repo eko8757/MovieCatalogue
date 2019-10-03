@@ -29,15 +29,15 @@ class DetailPresenterMovie(val view: DetailView.ViewMovie) : DetailView.Presente
     }
 
     override fun setFavorite(context: Context) {
-        DbHelper.getinstance(context).movieDao().insertMovie(dataGlobal)
+        DbHelper.getInstance(context).movieDao().insertMovie(dataGlobal)
         context.contentResolver.insert(CONTENT_URI, dataGlobal.values())
     }
 
     override fun unsetFavorite(context: Context) {
-        DbHelper.getinstance(context).movieDao().removeData(idMovie)
+        DbHelper.getInstance(context).movieDao().removeData(idMovie)
     }
 
     override fun getFavorite(context: Context): Boolean {
-        return DbHelper.getinstance(context).movieDao().getSelectDataMovie(idMovie) != null
+        return DbHelper.getInstance(context).movieDao().getSelectDataMovie(idMovie) != null
     }
 }

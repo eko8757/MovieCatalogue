@@ -17,12 +17,12 @@ class ServiceProvider: ContentProvider() {
     private val MOVIE = 1
     private val TV_SHOW = 2
     private val MOVIE_TABLE = ResponseMovie.ResultMovie::class.java.simpleName as String
-    private val TV_SHOW_TABLE = ResponseTv.ResultTvShow::class.java.simpleName as String
+    private val TV_TABLE = ResponseTv.ResultTvShow::class.java.simpleName as String
     private val uMatcher: UriMatcher = UriMatcher(UriMatcher.NO_MATCH)
 
     init {
         uMatcher.addURI(AUTHOR, MOVIE_TABLE, MOVIE)
-        uMatcher.addURI(AUTHOR, TV_SHOW_TABLE, TV_SHOW)
+        uMatcher.addURI(AUTHOR, TV_TABLE, TV_SHOW)
     }
 
     override fun insert(uri: Uri, values: ContentValues?): Uri? {
@@ -39,11 +39,11 @@ class ServiceProvider: ContentProvider() {
     ): Cursor? {
        when (uMatcher.match(uri)) {
            MOVIE -> {
-               val movieDao = DbHelper.getinstance(context).movieDao()
+               val movieDao = DbHelper.getInstance(context).movieDao()
                return movieDao.getAllMovieCursor()
            }
            TV_SHOW -> {
-               val tvDao = DbHelper.getinstance(context).tvDao()
+               val tvDao = DbHelper.getInstance(context).tvDao()
                return tvDao.getAllTvCursor()
            }
            else -> return null

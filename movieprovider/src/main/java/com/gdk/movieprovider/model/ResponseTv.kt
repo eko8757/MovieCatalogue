@@ -40,28 +40,29 @@ class ResponseTv {
     @Entity(tableName = "db_tv")
     @Parcelize
     data class ResultTvShow(
+
         @PrimaryKey
-        @SerializedName("id")
+        @SerializedName(StringResponseTvShow.id)
         @Expose
         var id: Long? = 0,
 
-        @SerializedName("original_name")
+        @SerializedName(StringResponseTvShow.original_name)
         @Expose
         var original_name: String? = null,
 
-        @SerializedName("poster_path")
+        @SerializedName(StringResponseTvShow.poster_path)
         @Expose
         var poster_path: String? = null,
 
-        @SerializedName("overview")
+        @SerializedName(StringResponseTvShow.overview)
         @Expose
         var overview: String? = null,
 
-        @SerializedName("first_air_date")
+        @SerializedName(StringResponseTvShow.first_air_date)
         @Expose
         var first_air_date: String? = null,
 
-        @SerializedName("vote_average")
+        @SerializedName(StringResponseTvShow.vote_average)
         @Expose
         var vote_average: Double? = 0.0
 

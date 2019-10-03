@@ -1,4 +1,4 @@
-package com.gdk.moviecatalogue.util
+package com.gdk.moviecatalogue.view
 
 interface BottomNavigationViewListener {
     fun hideBottomNavigationView()
