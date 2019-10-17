@@ -102,7 +102,7 @@ class SettingsPresenter(val view: SettingsView.ViewSetting): SettingsView.Presen
 
                     override fun onNext(t: ResponseMovie) {
                         view.hideProgress()
-                        context?.let {
+                        context?.let { it ->
                             if (t.results != null) {
                                 val data = t.results as ArrayList<ResponseMovie.ResultMovie>
                                 val movieTitle = data.joinToString(limit = 10, separator = ", ") {

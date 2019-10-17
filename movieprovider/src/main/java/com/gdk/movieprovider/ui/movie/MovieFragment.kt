@@ -7,13 +7,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.gdk.movieprovider.R
 import com.gdk.movieprovider.adapter.MovieAdapter
 import com.gdk.movieprovider.model.ResponseMovie
 import com.gdk.movieprovider.presenter.movie.MoviePresenter
 import com.gdk.movieprovider.view.MainView
-import kotlinx.android.synthetic.main.fragment_movie.view.*
 import org.jetbrains.anko.support.v4.toast
 
 class MovieFragment : Fragment(), MainView.MovieView, MovieAdapter.OnItemClickListener {
@@ -21,21 +22,14 @@ class MovieFragment : Fragment(), MainView.MovieView, MovieAdapter.OnItemClickLi
     private lateinit var adapter: MovieAdapter
     private lateinit var mPresenter: MoviePresenter
     private lateinit var dataGlobal: ArrayList<ResponseMovie.ResultMovie>
-    private val MOVIE_KEY = "DataMovieFavorite"
+    private lateinit var recyclerView: RecyclerView
+    private val MOVIE_KEY = "DataMovie"
     private lateinit var progressDialog: ProgressDialog
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_movie, container, false)
-    }
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-    @SuppressLint("WrongConstant")
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        view.rv_movie_provider.layoutManager = LinearLayoutManager(activity)
+        val view = inflater.inflate(R.layout.fragment_movie, container, false)
+        recyclerView = view.findViewById(R.id.rv_movie_provider)
 
         if (savedInstanceState != null && savedInstanceState.containsKey(MOVIE_KEY)) {
             showData(savedInstanceState.getParcelableArrayList(MOVIE_KEY))
@@ -43,6 +37,7 @@ class MovieFragment : Fragment(), MainView.MovieView, MovieAdapter.OnItemClickLi
             mPresenter = MoviePresenter(this)
             getData()
         }
+        return view
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -52,9 +47,11 @@ class MovieFragment : Fragment(), MainView.MovieView, MovieAdapter.OnItemClickLi
         }
     }
 
+    @SuppressLint("WrongConstant")
     override fun showData(data: ArrayList<ResponseMovie.ResultMovie>) {
+        recyclerView.layoutManager = LinearLayoutManager(context, LinearLayout.VERTICAL, false)
         adapter = MovieAdapter(data)
-        view?.rv_movie_provider?.adapter = adapter
+        recyclerView.adapter = adapter
         adapter.setOnItemClickListener(this)
         adapter.notifyDataSetChanged()
         this.dataGlobal = data

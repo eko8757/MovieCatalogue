@@ -12,15 +12,15 @@ interface TvDao {
     @Insert
     fun insertTvshow(data : ResponseTv.ResultTvShow)
 
-    @Query("SELECT * FROM db_tv")
+    @Query("SELECT * FROM tv_show_db")
     fun getAllDataTv() : List<ResponseTv.ResultTvShow>
 
-    @Query("SELECT * FROM db_tv WHERE id == :id")
+    @Query("SELECT * FROM tv_show_db WHERE id == :id")
     fun getSelectDataTv(id : Long) : ResponseTv.ResultTvShow
 
-    @Query("DELETE FROM db_tv WHERE id == :id")
+    @Query("DELETE FROM tv_show_db WHERE id == :id")
     fun removeData(id : Long)
 
-    @Query("SELECT * FROM db_tv")
+    @Query("SELECT * FROM tv_show_db")
     fun getAllTvCursor() : Cursor
 }

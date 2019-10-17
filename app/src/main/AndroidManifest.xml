@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <permission android:name="com.gdk.moviecatalogue.READ_DATABASE" android:protectionLevel="normal"/>
+    <permission android:name="com.gdk.moviecatalogue.WRITE_DATABASE" android:protectionLevel="normal"/>
 
     <application
         android:name=".util.Prefrences"
@@ -75,7 +76,8 @@
             android:name=".provider.ServiceProvider"
             android:authorities="com.gdk.moviecatalogue"
             android:exported="true"
-            android:readPermission="com.gdk.moviecatalogue.READ_DATABASE"/>
+            android:readPermission="com.gdk.moviecatalogue.READ_DATABASE"
+            android:writePermission="com.gdk.moviecatalogue.WRITE_DATABASE"/>
     </application>
 
 </manifest>

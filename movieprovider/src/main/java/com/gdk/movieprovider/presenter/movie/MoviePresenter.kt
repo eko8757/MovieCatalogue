@@ -13,32 +13,39 @@ import com.gdk.movieprovider.model.StringResponseMovie
 import com.gdk.movieprovider.ui.movie.DetailMovie
 import com.gdk.movieprovider.utils.StaticString
 import com.gdk.movieprovider.view.MainView
-import java.lang.Error
 
 class MoviePresenter(val view: MainView.MovieView) : MainView.MoviePresenter {
 
     private var resultMovie: ArrayList<ResponseMovie.ResultMovie>? = null
     private val MOVIE_TABLE = ResponseMovie.ResultMovie::class.java.simpleName as String
-    private val CONTENT_URI = Uri.parse(StaticString.SCHEME + "://" + StaticString.AUTHOR + "/" + MOVIE_TABLE)
+    private val CONTENT_URI =
+        Uri.parse(StaticString.SCHEME + "://" + StaticString.AUTHOR + "/" + MOVIE_TABLE)
 
     @SuppressLint("Recycle")
     override fun getMovie(context: Context) {
-        val client: ContentProviderClient = context.contentResolver.acquireContentProviderClient(CONTENT_URI)
+        val clientContentProvider: ContentProviderClient =
+            context.contentResolver.acquireContentProviderClient(CONTENT_URI)
         try {
-            assert(client != null) {
-                val cursor = client.query(
-                    CONTENT_URI, arrayOf(
-                        StringResponseMovie.id,
-                        StringResponseMovie.title,
-                        StringResponseMovie.poster_path,
-                        StringResponseMovie.overview,
-                        StringResponseMovie.release_date,
-                        StringResponseMovie.vote_average
-                    ), null, null, null, null
-                )
+            assert(clientContentProvider != null)
+            val cursor = clientContentProvider.query(
+                CONTENT_URI, arrayOf(
+                    StringResponseMovie.id,
+                    StringResponseMovie.overview,
+                    StringResponseMovie.poster_path,
+                    StringResponseMovie.release_date,
+                    StringResponseMovie.title,
+                    StringResponseMovie.vote_average
+                ),
+                null,
+                null,
+                null,
+                null
+            )
 
-                assert(cursor != null)
-                if (cursor.count > 0) {
+            assert(cursor != null)
+            val cursorCount = cursor?.count
+            if (cursorCount != null) {
+                if (cursorCount > 0) {
                     view.showData(convertCursor(cursor))
                     view.makeToast("Cursor not null")
                 } else {
@@ -47,8 +54,10 @@ class MoviePresenter(val view: MainView.MovieView) : MainView.MoviePresenter {
                     cursor.close()
                 }
             }
+
         } catch (e: RemoteException) {
             view.makeToast("Cursor error")
+            Log.d("errorContentResolver", e.message.toString())
             e.printStackTrace()
         }
     }

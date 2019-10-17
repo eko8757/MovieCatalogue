@@ -1,4 +1,5 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
@@ -8,7 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:weightSum="10">
+        android:weightSum="10"
+        android:padding="4dp">
 
         <StackView
             android:id="@+id/stack_view_favorite"
@@ -24,11 +26,12 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:background="@color/colorPrimaryDark"
-            android:text="Favorite"
+            android:text="Your Favorites"
             android:textAlignment="center"
-            android:textColor="@android:color/white"
+            android:textColor="#ffffff"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="normal"
+            android:fontFamily="@font/key_virtue"/>
     </LinearLayout>
 
     <TextView

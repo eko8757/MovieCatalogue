@@ -36,7 +36,7 @@ class TvFragment : Fragment(), MainView.TvShowView, TvAdapter.OnItemClickListene
     private lateinit var mAdapter: TvAdapter
     private lateinit var mPresenter: TvPresenter
     private lateinit var dataGlobal: ArrayList<ResponseTv.ResultTvShow>
-    private val KEY_TV = "DataTv"
+    private val TV_KEY = "DataTvShow"
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_tv, container, false)
@@ -51,7 +51,7 @@ class TvFragment : Fragment(), MainView.TvShowView, TvAdapter.OnItemClickListene
         val factory: BaseApi = BaseApi.create()
         view.rv_tv_show.layoutManager = LinearLayoutManager(context, LinearLayout.VERTICAL, false)
         if (savedInstanceState != null) {
-            showData(savedInstanceState.getParcelableArrayList(KEY_TV))
+            showData(savedInstanceState.getParcelableArrayList(TV_KEY))
         } else {
             mPresenter = TvPresenter(this, factory)
             getData()
@@ -102,7 +102,7 @@ class TvFragment : Fragment(), MainView.TvShowView, TvAdapter.OnItemClickListene
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         if (::dataGlobal.isInitialized) {
-            outState.putParcelableArrayList(KEY_TV, dataGlobal)
+            outState.putParcelableArrayList(TV_KEY, dataGlobal)
         }
     }
 

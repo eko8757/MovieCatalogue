@@ -4,7 +4,6 @@ import android.database.Cursor
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.gdk.movieprovider.model.StringResponseMovie.Companion.title
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
@@ -37,7 +36,7 @@ class ResponseTv {
     @Expose
     var results: List<ResultTvShow>? = null
 
-    @Entity(tableName = "db_tv")
+    @Entity(tableName = "tv_show_db")
     @Parcelize
     data class ResultTvShow(
 

@@ -16,32 +16,34 @@ class TvPresenter(val view: MainView.TvShowView) : MainView.TvShowPresenter {
 
     private var resultTv: ArrayList<ResponseTv.ResultTvShow>? = null
     private val TV_TABLE = ResponseTv.ResultTvShow::class.java.simpleName as String
-    private val CONTENT_URI = Uri.parse(StaticString.SCHEME + "://" + StaticString.AUTHOR + "/" + TV_TABLE)
+    private val CONTENT_URI =
+        Uri.parse(StaticString.SCHEME + "://" + StaticString.AUTHOR + "/" + TV_TABLE)
 
     override fun getTvShow(context: Context) {
 
-        val client: ContentProviderClient = context.contentResolver.acquireContentProviderClient(CONTENT_URI)
+        val clientContentProvider: ContentProviderClient =
+            context.contentResolver.acquireContentProviderClient(CONTENT_URI)
         try {
-            assert(client != null) {
-                val cursor = client.query(
-                    CONTENT_URI, arrayOf(
-                        StringResponseTvShow.id,
-                        StringResponseTvShow.original_name,
-                        StringResponseTvShow.poster_path,
-                        StringResponseTvShow.overview,
-                        StringResponseTvShow.first_air_date,
-                        StringResponseTvShow.vote_average
-                    ), null, null, null, null
-                )
+            assert(clientContentProvider != null)
+            val cursor = clientContentProvider.query(
+                CONTENT_URI, arrayOf(
+                    StringResponseTvShow.id,
+                    StringResponseTvShow.original_name,
+                    StringResponseTvShow.poster_path,
+                    StringResponseTvShow.overview,
+                    StringResponseTvShow.first_air_date,
+                    StringResponseTvShow.vote_average
+                ), null, null, null, null
+            )
 
-                assert(cursor != null)
-                if (cursor.count > 0) {
-                    view.showData(convertCursor(cursor))
-                } else {
-                    view.empty()
-                    cursor.close()
-                }
+            assert(cursor != null)
+            if (cursor.count > 0) {
+                view.showData(convertCursor(cursor))
+            } else {
+                view.empty()
+                cursor.close()
             }
+
         } catch (e: RemoteException) {
             e.printStackTrace()
         }

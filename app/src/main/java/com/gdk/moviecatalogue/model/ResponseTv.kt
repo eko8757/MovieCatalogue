@@ -2,10 +2,8 @@ package com.gdk.moviecatalogue.model
 
 import android.content.ContentValues
 import android.os.Parcelable
-import androidx.annotation.StringRes
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.gdk.moviecatalogue.model.StringResponseTvShow.Companion.first_air
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
@@ -16,7 +14,7 @@ class StringResponseTvShow{
         const val original_name = "original_name"
         const val poster_path = "poster_path"
         const val overview = "overview"
-        const val first_air = "first_air_date"
+        const val first_air_date = "first_air_date"
         const val vote_average = "vote_average"
     }
 }
@@ -38,7 +36,7 @@ class ResponseTv {
     @Expose
     var results: List<ResultTvShow>? = null
 
-    @Entity(tableName = "db_tv")
+    @Entity(tableName = "tv_show_db")
     @Parcelize
     data class ResultTvShow(
 
@@ -51,21 +49,21 @@ class ResponseTv {
         @Expose
         var original_name: String? = null,
 
-        @SerializedName(StringResponseTvShow.first_air)
+        @SerializedName(StringResponseTvShow.poster_path)
         @Expose
-        var first_air_date: String? = null,
-
-        @SerializedName(StringResponseTvShow.vote_average)
-        @Expose
-        var vote_average: Double? = 0.0,
+        var poster_path: String? = null,
 
         @SerializedName(StringResponseTvShow.overview)
         @Expose
         var overview: String? = null,
 
-        @SerializedName(StringResponseTvShow.poster_path)
+        @SerializedName(StringResponseTvShow.first_air_date)
         @Expose
-        var poster_path: String? = null
+        var first_air_date: String? = null,
+
+        @SerializedName(StringResponseTvShow.vote_average)
+        @Expose
+        var vote_average: Double? = 0.0
 
     ) : Parcelable {
         fun values(): ContentValues {
@@ -74,9 +72,8 @@ class ResponseTv {
             contentValues.put(StringResponseTvShow.original_name, original_name)
             contentValues.put(StringResponseTvShow.poster_path, poster_path)
             contentValues.put(StringResponseTvShow.overview, overview)
-            contentValues.put(StringResponseTvShow.first_air, first_air)
+            contentValues.put(StringResponseTvShow.first_air_date, first_air_date)
             contentValues.put(StringResponseTvShow.vote_average, vote_average)
-
             return contentValues
         }
     }

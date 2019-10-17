@@ -2,6 +2,7 @@ package com.gdk.moviecatalogue.ui
 
 import android.annotation.SuppressLint
 import android.app.ProgressDialog
+import android.content.Context
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -82,7 +83,7 @@ class SettingsActivity : AppCompatActivity(), SettingsView.ViewSetting, View.OnC
 
     override fun setDailyAlarm() {
         isDailyAlarm = !isDailyAlarm
-        applicationContext?.let { mPresenter.setDailyAlarm(isDailyAlarm, it) }
+        this.let { mPresenter.setDailyAlarm(isDailyAlarm, it) }
         Prefs.putBoolean(StaticString.DAILY_ALARM_ON, isDailyAlarm)
         sw_daily_reminder.isChecked = isDailyAlarm
     }
@@ -91,10 +92,10 @@ class SettingsActivity : AppCompatActivity(), SettingsView.ViewSetting, View.OnC
         isReleaseAlarm = !isReleaseAlarm
 
         if (isReleaseAlarm) {
-            applicationContext?.let { mPresenter.getReleaseToday(applicationContext) }
+            this.let { mPresenter.getReleaseToday(this) }
             hideProgress()
         } else {
-            applicationContext?.let { mPresenter.setReleaseTodayMovieAlarm(isReleaseAlarm, it, "") }
+           this.let { mPresenter.setReleaseTodayMovieAlarm(isReleaseAlarm, it, "") }
             hideProgress()
         }
 

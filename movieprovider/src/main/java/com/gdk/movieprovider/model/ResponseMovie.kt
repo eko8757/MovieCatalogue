@@ -36,13 +36,13 @@ class ResponseMovie {
     @Expose
     var results: List<ResultMovie>? = null
 
-    @Entity(tableName = "db_movie")
+    @Entity(tableName = "movie_db")
     @Parcelize
     data class ResultMovie (
         @PrimaryKey
         @SerializedName(StringResponseMovie.id)
         @Expose
-        var id: Long? = 0,
+        var id: Long? = 0L,
 
         @SerializedName(StringResponseMovie.title)
         @Expose
@@ -67,10 +67,10 @@ class ResponseMovie {
     ) : Parcelable {
         constructor(cursor: Cursor) : this() {
             id = (cursor.getLong(cursor.getColumnIndex(StringResponseMovie.id)))
-            title = (cursor.getString(cursor.getColumnIndex(StringResponseMovie.title)))
-            poster_path = (cursor.getString(cursor.getColumnIndex(StringResponseMovie.poster_path)))
             overview = (cursor.getString(cursor.getColumnIndex(StringResponseMovie.overview)))
+            poster_path = (cursor.getString(cursor.getColumnIndex(StringResponseMovie.poster_path)))
             release_date = (cursor.getString(cursor.getColumnIndex(StringResponseMovie.release_date)))
+            title = (cursor.getString(cursor.getColumnIndex(StringResponseMovie.title)))
             vote_average = (cursor.getDouble(cursor.getColumnIndex(StringResponseMovie.vote_average)))
 
         }

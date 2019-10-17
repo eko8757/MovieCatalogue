@@ -18,15 +18,15 @@ class ServiceProvider: ContentProvider() {
     private val TV_SHOW = 2
     private val MOVIE_TABLE = ResponseMovie.ResultMovie::class.java.simpleName as String
     private val TV_TABLE = ResponseTv.ResultTvShow::class.java.simpleName as String
-    private val uMatcher: UriMatcher = UriMatcher(UriMatcher.NO_MATCH)
+    private val uriMatcher: UriMatcher = UriMatcher(UriMatcher.NO_MATCH)
 
     init {
-        uMatcher.addURI(AUTHOR, MOVIE_TABLE, MOVIE)
-        uMatcher.addURI(AUTHOR, TV_TABLE, TV_SHOW)
+        uriMatcher.addURI(AUTHOR, MOVIE_TABLE, MOVIE)
+        uriMatcher.addURI(AUTHOR, TV_TABLE, TV_SHOW)
     }
 
     override fun insert(uri: Uri, values: ContentValues?): Uri? {
-       Objects.requireNonNull(context).contentResolver.notifyChange(uri, null)
+        Objects.requireNonNull(context).contentResolver.notifyChange(uri, null)
         return uri
     }
 
@@ -37,33 +37,27 @@ class ServiceProvider: ContentProvider() {
         selectionArgs: Array<String>?,
         sortOrder: String?
     ): Cursor? {
-       when (uMatcher.match(uri)) {
-           MOVIE -> {
-               val movieDao = DbHelper.getInstance(context).movieDao()
-               return movieDao.getAllMovieCursor()
-           }
-           TV_SHOW -> {
-               val tvDao = DbHelper.getInstance(context).tvDao()
-               return tvDao.getAllTvCursor()
-           }
-           else -> return null
-       }
+        when (uriMatcher.match(uri)) {
+            MOVIE -> {
+                val movieDao = DbHelper.getInstance(context).movieDao()
+                return movieDao.getAllMovieCursor()
+            }
+            TV_SHOW -> {
+                val tvDao = DbHelper.getInstance(context).tvDao()
+                return tvDao.getAllTvCursor()
+            }
+            else -> return null
+        }
     }
 
-    override fun onCreate(): Boolean {
-        return true
-    }
+    override fun onCreate(): Boolean = true
 
-    override fun update(uri: Uri, values: ContentValues?, selection: String?, selectionArgs: Array<String>?): Int {
-        return 0
-    }
+    override fun update(uri: Uri, values: ContentValues?, selection: String?, selectionArgs: Array<String>?): Int = 0
 
     override fun delete(uri: Uri, selection: String?, selectionArgs: Array<String>?): Int {
         Objects.requireNonNull(context).contentResolver.notifyChange(uri, null)
         return 0
     }
 
-    override fun getType(uri: Uri): String? {
-        return null
-    }
+    override fun getType(uri: Uri): String? = null
 }

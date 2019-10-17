@@ -30,7 +30,7 @@ class MovieFragment : Fragment(), MainView.MovieView, MovieAdapter.OnItemClickLi
     private lateinit var mAdapter: MovieAdapter
     private lateinit var mPresenter: MoviePresenter
     private lateinit var dataGlobal: ArrayList<ResponseMovie.ResultMovie>
-    private val KEY_MOVIE = "DataMovie"
+    private val MOVIE_KEY = "DataMovie"
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_movie, container, false)
@@ -45,7 +45,7 @@ class MovieFragment : Fragment(), MainView.MovieView, MovieAdapter.OnItemClickLi
         val factory: BaseApi = BaseApi.create()
         view.rv_movie.layoutManager = LinearLayoutManager(context, LinearLayout.VERTICAL, false)
         if (savedInstanceState != null) {
-            showData(savedInstanceState.getParcelableArrayList(KEY_MOVIE))
+            showData(savedInstanceState.getParcelableArrayList(MOVIE_KEY))
         } else {
             mPresenter = MoviePresenter(this, factory)
             getData()
@@ -97,7 +97,7 @@ class MovieFragment : Fragment(), MainView.MovieView, MovieAdapter.OnItemClickLi
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         if (::dataGlobal.isInitialized) {
-            outState.putParcelableArrayList(KEY_MOVIE, dataGlobal)
+            outState.putParcelableArrayList(MOVIE_KEY, dataGlobal)
         }
     }
 

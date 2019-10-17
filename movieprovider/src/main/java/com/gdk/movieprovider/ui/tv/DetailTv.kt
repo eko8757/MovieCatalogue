@@ -17,6 +17,7 @@ class DetailTv : AppCompatActivity(), DetailView.ViewTV {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_tv)
         mPresenter = DetailTvPresenter(this)
+        getData()
     }
 
     override fun getData() {

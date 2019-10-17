@@ -2,8 +2,6 @@ package com.gdk.movieprovider.ui.tv
 
 import android.annotation.SuppressLint
 import android.app.ProgressDialog
-import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,17 +9,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 import com.gdk.movieprovider.R
 import com.gdk.movieprovider.adapter.TvAdapter
 import com.gdk.movieprovider.model.ResponseTv
 import com.gdk.movieprovider.presenter.tv.TvPresenter
-import com.gdk.movieprovider.ui.movie.MovieFragment
 import com.gdk.movieprovider.view.MainView
-import kotlinx.android.synthetic.main.fragment_tv.*
-import kotlinx.android.synthetic.main.fragment_tv.view.*
-import org.jetbrains.anko.support.v4.progressDialog
-import org.jetbrains.anko.support.v4.toast
 
 class TvFragment : Fragment(), MainView.TvShowView, TvAdapter.OnItemClickListener {
 
@@ -29,20 +23,12 @@ class TvFragment : Fragment(), MainView.TvShowView, TvAdapter.OnItemClickListene
     private lateinit var mPresenter: TvPresenter
     private lateinit var dataGlobal: ArrayList<ResponseTv.ResultTvShow>
     private lateinit var progressDialog: ProgressDialog
+    private lateinit var recyclerView: RecyclerView
     private val TV_KEY = "DataTvShow"
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tv, container, false)
-    }
-
-    @SuppressLint("WrongConstant")
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        view.rv_tv_provider.layoutManager = LinearLayoutManager(context, LinearLayout.VERTICAL, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val view = inflater.inflate(R.layout.fragment_tv, container, false)
+        recyclerView = view.findViewById(R.id.rv_tv_provider)
 
         if (savedInstanceState != null) {
             showData(savedInstanceState.getParcelableArrayList(TV_KEY))
@@ -50,6 +36,7 @@ class TvFragment : Fragment(), MainView.TvShowView, TvAdapter.OnItemClickListene
             mPresenter = TvPresenter(this)
             getData()
         }
+        return view
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -59,9 +46,11 @@ class TvFragment : Fragment(), MainView.TvShowView, TvAdapter.OnItemClickListene
         }
     }
 
+    @SuppressLint("WrongConstant")
     override fun showData(data: ArrayList<ResponseTv.ResultTvShow>) {
+        recyclerView.layoutManager = LinearLayoutManager(context, LinearLayout.VERTICAL, false)
         adapter = TvAdapter(data)
-        view?.rv_tv_provider?.adapter = adapter
+        recyclerView.adapter = adapter
         adapter.setOnItemClickListener(this)
         adapter.notifyDataSetChanged()
         this.dataGlobal = data
