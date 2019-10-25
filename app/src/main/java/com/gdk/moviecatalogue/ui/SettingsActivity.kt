@@ -90,12 +90,11 @@ class SettingsActivity : AppCompatActivity(), SettingsView.ViewSetting, View.OnC
 
     override fun setReleaseMovieToday() {
         isReleaseAlarm = !isReleaseAlarm
-
         if (isReleaseAlarm) {
-            this.let { mPresenter.getReleaseToday(this) }
+            this.let { mPresenter.setReleaseTodayMovieAlarm(true, true, it) }
             hideProgress()
         } else {
-           this.let { mPresenter.setReleaseTodayMovieAlarm(isReleaseAlarm, it, "") }
+           this.let { mPresenter.setReleaseTodayMovieAlarm(false, false, it) }
             hideProgress()
         }
 

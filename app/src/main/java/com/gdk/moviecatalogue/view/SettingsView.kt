@@ -15,7 +15,6 @@ interface SettingsView {
 
     interface PresenterSetting {
         fun setDailyAlarm(isOn : Boolean, context: Context)
-        fun setReleaseTodayMovieAlarm(isOn : Boolean, context: Context, data: String)
-        fun getReleaseToday(context: Context?)
+        fun setReleaseTodayMovieAlarm(isNotif: Boolean, isRepeat: Boolean, context: Context)
     }
 }

@@ -5,6 +5,7 @@ import com.gdk.moviecatalogue.model.ResponseTv
 import com.google.gson.GsonBuilder
 import io.reactivex.Observable
 import okhttp3.OkHttpClient
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -45,7 +46,7 @@ interface BaseApi {
         @Query("api_key") api_key: String,
         @Query("primary_release_date.lte") gte: String,
         @Query("primary_release_date.gte") lte: String
-    ): Observable<ResponseMovie>
+    ): Observable<Response<ResponseMovie>>
 
     companion object {
         var URL: String = "https://api.themoviedb.org/3/"
